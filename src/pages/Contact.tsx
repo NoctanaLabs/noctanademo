@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -11,6 +11,11 @@ const Contact = () => {
     { id: 1, text: "Hello! I'm your AI assistant. How can I help you today?", isBot: true }
   ]);
   const [inputMessage, setInputMessage] = useState("");
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleSendMessage = () => {
     if (!inputMessage.trim()) return;
