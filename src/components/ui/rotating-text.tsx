@@ -7,7 +7,7 @@ interface RotatingTextProps {
   className?: string;
 }
 
-export function RotatingText({ words, interval = 5000, className }: RotatingTextProps) {
+export function RotatingText({ words, interval = 4000, className }: RotatingTextProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [trigger, setTrigger] = useState(true);
 
