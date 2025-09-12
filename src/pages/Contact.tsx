@@ -1,18 +1,25 @@
 import { motion } from "framer-motion";
 import { SplineScene } from "@/components/ui/splite";
-import Navigation from "@/components/ui/navigation";
 import { memo } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, ArrowLeft } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Contact = memo(() => {
   return (
     <div className="min-h-screen bg-background">
-      {/* Navigation */}
-      <Navigation />
+      {/* Back Button */}
+      <div className="fixed top-6 left-6 z-50">
+        <Button asChild variant="ghost" size="sm" className="rounded-full">
+          <Link to="/">
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back
+          </Link>
+        </Button>
+      </div>
       {/* Hero Section */}
       <section className="py-24 px-8 bg-gradient-to-b from-background to-muted/30">
         <div className="max-w-4xl mx-auto text-center">
