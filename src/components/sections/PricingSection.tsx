@@ -5,7 +5,7 @@ import { Check, Star } from "lucide-react";
 
 const pricingPlans = [
   {
-    name: "Workflow Templates",
+    name: "Ready Made AI",
     features: [
       "Ready-to-use workflows",
       "Quick setup", 
@@ -14,7 +14,7 @@ const pricingPlans = [
     popular: false
   },
   {
-    name: "Custom Workflows",
+    name: "Customised AI",
     features: [
       "Tailored to your processes",
       "Scalable solutions",
@@ -23,7 +23,7 @@ const pricingPlans = [
     popular: true
   },
   {
-    name: "Full AI Agent Suite",
+    name: "AI Agent Suite",
     features: [
       "Dedicated AI agents",
       "End-to-end operations",
