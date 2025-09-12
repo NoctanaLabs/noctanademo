@@ -90,6 +90,7 @@ const PricingSection = () => {
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: 0.5 }}
+                  viewport={{ once: true }}
                   className="absolute -top-6 inset-x-0 z-10 flex justify-center"
                 >
                   <div className="inline-flex items-center gap-1 bg-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-medium shadow-elegant pointer-events-none">
@@ -100,14 +101,14 @@ const PricingSection = () => {
               )}
               
               <Card className={`h-96 transition-all duration-300 bg-card/50 backdrop-blur-sm border-border/30 hover:border-primary/40 hover:shadow-glow group-hover:bg-card/70 ${
-                plan.popular ? 'border-primary/40 shadow-glow bg-card/60' : ''
+                plan.popular ? 'border-primary/40 shadow-glow bg-card/60 scale-105' : ''
               }`}>
                 <CardHeader className="text-center pb-6 pt-8">
                   <CardTitle className="text-2xl font-bold tracking-tight mb-4 text-foreground">
                     {plan.name}
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="px-9 pb-8">
+                <CardContent className="px-9 pb-8 flex flex-col items-center">
                   <ul className="space-y-4">
                     {plan.features.map((feature, featureIndex) => (
                       <motion.li
@@ -116,12 +117,12 @@ const PricingSection = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.4, delay: 0.6 + featureIndex * 0.1 }}
                         viewport={{ once: true }}
-                        className="flex items-start gap-3"
+                        className="flex items-start gap-3 justify-center"
                       >
                         <div className="flex-shrink-0 w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center mt-0.5">
                           <Check className="w-3 h-3 text-primary" />
                         </div>
-                        <span className="text-muted-foreground leading-relaxed">{feature}</span>
+                        <span className="text-muted-foreground leading-relaxed text-center">{feature}</span>
                       </motion.li>
                     ))}
                   </ul>
