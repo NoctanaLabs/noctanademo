@@ -50,51 +50,12 @@ const Contact = () => {
       </header>
 
       <div className="max-w-6xl mx-auto px-8 py-24">
-        <div className="grid lg:grid-cols-[1fr_3fr] gap-16 items-stretch">
-          {/* Contact Information */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="space-y-8"
-          >
-            <div className="space-y-6">
-              <h1 className="text-4xl lg:text-5xl font-semibold tracking-tight text-foreground">
-                Get in Touch
-              </h1>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Ready to transform your business with AI? Start a conversation with our intelligent assistant or reach out to our team directly.
-              </p>
-            </div>
-
-            {/* Contact Methods */}
-            <div className="space-y-6">
-              <div className="p-6 rounded-2xl bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-sm border border-border/30">
-                <h3 className="text-xl font-semibold text-foreground mb-4">Contact Information</h3>
-                <div className="space-y-3 text-muted-foreground">
-                  <p>📧 hello@noctanalabs.com</p>
-                  <p>📞 +1 (555) 123-4567</p>
-                  <p>🏢 San Francisco, CA</p>
-                </div>
-              </div>
-
-              <div className="p-6 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20">
-                <div className="flex items-center gap-3 mb-3">
-                  <Bot className="w-6 h-6 text-primary" />
-                  <h3 className="text-xl font-semibold text-foreground">AI Assistant</h3>
-                </div>
-                <p className="text-muted-foreground">
-                  Get instant answers to your questions using our AI chat feature on the right.
-                </p>
-              </div>
-            </div>
-          </motion.div>
-
+        <div className="space-y-16">
           {/* Chat Interface */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
             className="space-y-6"
           >
             <div className="flex items-center gap-3 mb-6">
@@ -139,6 +100,45 @@ const Contact = () => {
               >
                 <Send className="w-4 h-4" />
               </Button>
+            </div>
+          </motion.div>
+
+          {/* Contact Information */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="space-y-8"
+          >
+            <div className="space-y-6">
+              <h1 className="text-4xl lg:text-5xl font-semibold tracking-tight text-foreground">
+                Get in Touch
+              </h1>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                Ready to transform your business with AI? Start a conversation with our intelligent assistant above or reach out to our team directly.
+              </p>
+            </div>
+
+            {/* Contact Methods */}
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="p-6 rounded-2xl bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-sm border border-border/30">
+                <h3 className="text-xl font-semibold text-foreground mb-4">Contact Information</h3>
+                <div className="space-y-3 text-muted-foreground">
+                  <p>📧 hello@noctanalabs.com</p>
+                  <p>📞 +1 (555) 123-4567</p>
+                  <p>🏢 San Francisco, CA</p>
+                </div>
+              </div>
+
+              <div className="p-6 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20">
+                <div className="flex items-center gap-3 mb-3">
+                  <Bot className="w-6 h-6 text-primary" />
+                  <h3 className="text-xl font-semibold text-foreground">AI Assistant</h3>
+                </div>
+                <p className="text-muted-foreground">
+                  Get instant answers to your questions using our AI chat feature above.
+                </p>
+              </div>
             </div>
           </motion.div>
         </div>
