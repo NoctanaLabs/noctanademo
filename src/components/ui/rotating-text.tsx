@@ -7,7 +7,7 @@ interface RotatingTextProps {
   className?: string;
 }
 
-export const RotatingText = memo(function RotatingText({ words, interval = 4000, className }: RotatingTextProps) {
+export const RotatingText = memo(function RotatingText({ words, interval = 6000, className }: RotatingTextProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [trigger, setTrigger] = useState(true);
   const timeoutRef = useRef<number | null>(null);
