@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const AboutSection = () => {
   return (
-    <section className="py-24 px-8">
+    <section className="py-24 px-8 bg-gradient-to-b from-muted/15 to-transparent">
       <div className="max-w-6xl mx-auto">
         <div className="text-center space-y-16">
           {/* Services Header */}
@@ -45,9 +45,9 @@ const AboutSection = () => {
               <motion.div 
                 whileHover={{ rotate: 360, scale: 1.05 }}
                 transition={{ duration: 0.3 }}
-                className="w-16 h-16 bg-gradient-to-br from-primary/30 to-primary/10 rounded-2xl flex items-center justify-center shadow-inner transition-shadow duration-200"
+                className="w-16 h-16 bg-gradient-to-br from-primary/30 to-primary/10 rounded-2xl flex items-center justify-center shadow-inner transition-shadow duration-200 mx-auto"
               >
-                <Bot className="w-6 h-6 text-primary" />
+                <Bot className="w-8 h-8 text-primary" />
               </motion.div>
               <h3 className="text-xl font-semibold text-foreground transition-colors duration-200">AI Automation</h3>
               <p className="text-muted-foreground leading-relaxed">Streamline repetitive tasks and boost efficiency with intelligent automation workflows.</p>
@@ -65,7 +65,7 @@ const AboutSection = () => {
               <motion.div 
                 whileHover={{ scale: 1.1, y: -2 }}
                 transition={{ duration: 0.2 }}
-                className="w-16 h-16 bg-gradient-to-br from-primary/30 to-primary/10 rounded-2xl flex items-center justify-center shadow-inner transition-shadow duration-200"
+                className="w-16 h-16 bg-gradient-to-br from-primary/30 to-primary/10 rounded-2xl flex items-center justify-center shadow-inner transition-shadow duration-200 mx-auto"
               >
                 <BarChart3 className="w-8 h-8 text-primary" />
               </motion.div>
@@ -85,7 +85,7 @@ const AboutSection = () => {
               <motion.div 
                 whileHover={{ rotate: 180, scale: 1.05 }}
                 transition={{ duration: 0.3 }}
-                className="w-16 h-16 bg-gradient-to-br from-primary/30 to-primary/10 rounded-2xl flex items-center justify-center shadow-inner transition-shadow duration-200"
+                className="w-16 h-16 bg-gradient-to-br from-primary/30 to-primary/10 rounded-2xl flex items-center justify-center shadow-inner transition-shadow duration-200 mx-auto"
               >
                 <Puzzle className="w-8 h-8 text-primary" />
               </motion.div>
