@@ -100,14 +100,14 @@ export function DottedSurface({ className, ...props }: DottedSurfaceProps) {
 		const animate = () => {
 			animationId = requestAnimationFrame(animate);
 
-			// Gradually slow down animation over 5 seconds
+			// Gradually slow down animation over 6 seconds
 			const elapsed = Date.now() - startTime;
-			if (elapsed < 5000) {
-				// Smooth transition from 100% to 15% over 5 seconds
-				const progress = elapsed / 5000;
-				animationSpeed = 0.1 * (1 - progress * 0.85); // From 0.1 to 0.015 (15%)
+			if (elapsed < 6000) {
+				// Smooth transition from 100% to 20% over 6 seconds
+				const progress = elapsed / 6000;
+				animationSpeed = 0.1 * (1 - progress * 0.80); // From 0.1 to 0.020 (20%)
 			} else {
-				animationSpeed = 0.015; // 15% of original speed
+				animationSpeed = 0.020; // 20% of original speed
 			}
 
 			const positionAttribute = geometry.attributes.position;
