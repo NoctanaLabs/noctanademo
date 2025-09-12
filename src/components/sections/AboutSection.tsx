@@ -1,10 +1,9 @@
 import { motion } from "framer-motion";
-import { SplineScene } from "@/components/ui/splite";
-import { memo } from "react";
+import { cn } from "@/lib/utils";
 
-const AboutSection = memo(() => {
+const AboutSection = () => {
   return (
-    <section className="py-21 px-8 bg-muted/50 backdrop-blur-sm">
+    <section className="py-24 px-8 bg-muted/50 backdrop-blur-sm">{/* Lighter muted background */}
       <div className="max-w-6xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Text Content */}
@@ -23,7 +22,7 @@ const AboutSection = memo(() => {
             </p>
           </motion.div>
 
-          {/* Spline 3D Scene */}
+          {/* Animated Illustration */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -43,17 +42,32 @@ const AboutSection = memo(() => {
               }}
               className="relative"
             >
-              <SplineScene 
-                scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-                className="w-full h-96 rounded-2xl"
-                reducedQuality={true}
-              />
+              <div className="w-full h-96 rounded-2xl bg-gradient-subtle border border-border/50 p-8 flex items-center justify-center overflow-hidden">
+                {/* Geometric shapes representing AI/automation */}
+                <div className="relative w-full h-full">
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    className="absolute top-8 right-8 w-16 h-16 border-2 border-primary/30 rounded-full"
+                  />
+                  <motion.div
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute bottom-12 left-12 w-12 h-12 bg-primary/20 rounded-lg"
+                  />
+                  <motion.div
+                    animate={{ x: [0, 20, 0] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 border border-accent/30 rounded-2xl bg-accent/10"
+                  />
+                </div>
+              </div>
             </motion.div>
           </motion.div>
         </div>
       </div>
     </section>
   );
-});
+};
 
 export default AboutSection;

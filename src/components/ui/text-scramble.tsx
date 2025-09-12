@@ -1,5 +1,5 @@
 'use client';
-import { type JSX, useEffect, useState, memo, useCallback, useMemo } from 'react';
+import { type JSX, useEffect, useState } from 'react';
 import { motion, MotionProps } from 'framer-motion';
 
 type TextScrambleProps = {
@@ -16,7 +16,7 @@ type TextScrambleProps = {
 const defaultChars =
   'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-export const TextScramble = memo(function TextScramble({
+export function TextScramble({
   children,
   duration = 0.8,
   speed = 0.04,
@@ -27,16 +27,14 @@ export const TextScramble = memo(function TextScramble({
   onScrambleComplete,
   ...props
 }: TextScrambleProps) {
-  const MotionComponent = useMemo(() => 
-    motion.create(Component as keyof JSX.IntrinsicElements), 
-    [Component]
+  const MotionComponent = motion.create(
+    Component as keyof JSX.IntrinsicElements
   );
-  
   const [displayText, setDisplayText] = useState(children);
   const [isAnimating, setIsAnimating] = useState(false);
   const text = children;
 
-  const scramble = useCallback(async () => {
+  const scramble = async () => {
     if (isAnimating) return;
     setIsAnimating(true);
 
@@ -71,10 +69,11 @@ export const TextScramble = memo(function TextScramble({
         onScrambleComplete?.();
       }
     }, speed * 1000);
-  }, [isAnimating, duration, speed, characterSet, text, onScrambleComplete]);
+  };
 
   useEffect(() => {
     if (!trigger) return;
+
     scramble();
   }, [trigger]);
 
@@ -83,4 +82,4 @@ export const TextScramble = memo(function TextScramble({
       {displayText}
     </MotionComponent>
   );
-});
+}
