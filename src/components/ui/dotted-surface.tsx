@@ -93,10 +93,18 @@ export function DottedSurface({ className, ...props }: DottedSurfaceProps) {
 
 		let count = 0;
 		let animationId: number;
+		let animationSpeed = 0.1;
+		const startTime = Date.now();
 
 		// Animation function
 		const animate = () => {
 			animationId = requestAnimationFrame(animate);
+
+			// Slow down animation after 4 seconds
+			const elapsed = Date.now() - startTime;
+			if (elapsed > 4000 && animationSpeed > 0.015) {
+				animationSpeed = 0.015; // 15% of original speed
+			}
 
 			const positionAttribute = geometry.attributes.position;
 			const positions = positionAttribute.array as Float32Array;
@@ -127,7 +135,7 @@ export function DottedSurface({ className, ...props }: DottedSurfaceProps) {
 			}
 
 			renderer.render(scene, camera);
-			count += 0.1;
+			count += animationSpeed;
 		};
 
 		// Handle window resize
