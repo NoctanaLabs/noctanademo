@@ -50,7 +50,7 @@ const Contact = () => {
       </header>
 
       <div className="max-w-6xl mx-auto px-8 py-24">
-        <div className="grid lg:grid-cols-2 gap-16">
+        <div className="grid lg:grid-cols-[1fr_3fr] gap-16">
           {/* Contact Information */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
