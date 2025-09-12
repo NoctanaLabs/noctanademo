@@ -5,7 +5,7 @@ import { Check, Star } from "lucide-react";
 
 const pricingPlans = [
   {
-    name: "Ready Made AI",
+    name: "AI Templates",
     features: [
       "Ready-to-use workflows",
       "Quick setup", 
@@ -14,7 +14,7 @@ const pricingPlans = [
     popular: false
   },
   {
-    name: "Customised AI",
+    name: "Custom Made AI",
     features: [
       "Tailored to your processes",
       "Scalable solutions",
