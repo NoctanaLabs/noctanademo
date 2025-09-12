@@ -27,7 +27,7 @@ const features = [
 
 const FeaturesSection = () => {
   return (
-    <section className="py-24 px-8 bg-background/65 backdrop-blur-sm">{/* 35% translucent */}
+    <section className="py-24 px-8 bg-background/35 backdrop-blur-sm">{/* 35% opacity (65% translucent) */}
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
