@@ -9,12 +9,14 @@ interface SplineSceneProps {
   scene: string
   className?: string
   fallbackHeight?: string
+  reducedQuality?: boolean
 }
 
 export const SplineScene = memo(function SplineScene({ 
   scene, 
   className, 
-  fallbackHeight = "h-96" 
+  fallbackHeight = "h-96",
+  reducedQuality = false
 }: SplineSceneProps) {
   const [isLoaded, setIsLoaded] = useState(false)
   const [hasError, setHasError] = useState(false)
@@ -60,9 +62,17 @@ export const SplineScene = memo(function SplineScene({
         )}
         <Spline
           scene={scene}
-          className={className}
+          className={reducedQuality ? cn(className, "scale-75 origin-center") : className}
           onLoad={handleLoad}
           onError={handleError}
+          style={{
+            ...(reducedQuality && {
+              imageRendering: 'pixelated',
+              filter: 'contrast(0.9) brightness(0.95)',
+              transform: 'scale(0.7)',
+              transformOrigin: 'center',
+            })
+          }}
         />
       </div>
     </Suspense>

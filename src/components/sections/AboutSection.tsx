@@ -46,6 +46,7 @@ const AboutSection = memo(() => {
               <SplineScene 
                 scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
                 className="w-full h-96 rounded-2xl"
+                reducedQuality={true}
               />
             </motion.div>
           </motion.div>
