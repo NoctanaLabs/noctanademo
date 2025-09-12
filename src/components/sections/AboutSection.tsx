@@ -1,5 +1,59 @@
 import { motion } from "framer-motion";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, Sphere, Box, Torus } from "@react-three/drei";
+import { useRef } from "react";
+import { useFrame } from "@react-three/fiber";
+import * as THREE from "three";
 import { cn } from "@/lib/utils";
+
+// Animated 3D Scene Component
+const AnimatedScene = () => {
+  const sphereRef = useRef<THREE.Mesh>(null);
+  const boxRef = useRef<THREE.Mesh>(null);
+  const torusRef = useRef<THREE.Mesh>(null);
+
+  useFrame((state) => {
+    const time = state.clock.getElapsedTime();
+    
+    if (sphereRef.current) {
+      sphereRef.current.rotation.x = time * 0.5;
+      sphereRef.current.rotation.y = time * 0.3;
+      sphereRef.current.position.y = Math.sin(time) * 0.5;
+    }
+    
+    if (boxRef.current) {
+      boxRef.current.rotation.x = time * 0.7;
+      boxRef.current.rotation.z = time * 0.4;
+    }
+    
+    if (torusRef.current) {
+      torusRef.current.rotation.x = time * 0.3;
+      torusRef.current.rotation.y = time * 0.6;
+    }
+  });
+
+  return (
+    <>
+      <ambientLight intensity={0.4} />
+      <pointLight position={[10, 10, 10]} intensity={1} />
+      <pointLight position={[-10, -10, -10]} intensity={0.5} color="#64748b" />
+      
+      <Sphere ref={sphereRef} position={[-2, 0, 0]} args={[0.8, 32, 32]}>
+        <meshStandardMaterial color="#3b82f6" transparent opacity={0.8} />
+      </Sphere>
+      
+      <Box ref={boxRef} position={[2, 0, 0]} args={[1, 1, 1]}>
+        <meshStandardMaterial color="#10b981" wireframe />
+      </Box>
+      
+      <Torus ref={torusRef} position={[0, 2, 0]} args={[1, 0.3, 16, 100]}>
+        <meshStandardMaterial color="#f59e0b" transparent opacity={0.7} />
+      </Torus>
+      
+      <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={1} />
+    </>
+  );
+};
 
 const AboutSection = () => {
   return (
@@ -42,26 +96,9 @@ const AboutSection = () => {
               }}
               className="relative"
             >
-              <div className="w-full h-96 rounded-2xl bg-gradient-subtle border border-border/50 p-8 flex items-center justify-center overflow-hidden">
-                {/* Geometric shapes representing AI/automation */}
-                <div className="relative w-full h-full">
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    className="absolute top-8 right-8 w-16 h-16 border-2 border-primary/30 rounded-full"
-                  />
-                  <motion.div
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute bottom-12 left-12 w-12 h-12 bg-primary/20 rounded-lg"
-                  />
-                  <motion.div
-                    animate={{ x: [0, 20, 0] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 border border-accent/30 rounded-2xl bg-accent/10"
-                  />
-                </div>
-              </div>
+              <Canvas className="w-full h-96 rounded-2xl">
+                <AnimatedScene />
+              </Canvas>
             </motion.div>
           </motion.div>
         </div>
