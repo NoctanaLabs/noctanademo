@@ -11,7 +11,7 @@ const Index = () => {
       
       {/* Main Content */}
       <div className="relative z-10 flex min-h-screen items-center justify-center">
-        <div className="text-center space-y-4 px-4 -mt-[90px]">
+        <div className="text-center space-y-4 px-4 -mt-[60px] sm:-mt-[80px] md:-mt-[100px] lg:-mt-[120px]">
           {/* Elegant glow effect */}
           <div aria-hidden="true" className={cn('pointer-events-none absolute -top-10 left-1/2 size-full -translate-x-1/2 rounded-full', 'bg-gradient-glow', 'blur-[30px]')} />
           
