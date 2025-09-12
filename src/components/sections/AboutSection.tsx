@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 const AboutSection = () => {
   return (
-    <section className="py-24 px-8">
+    <section className="py-24 px-8 bg-background/40">{/* 60% translucent */}
       <div className="max-w-6xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Text Content */}
