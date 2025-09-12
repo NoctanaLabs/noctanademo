@@ -17,13 +17,8 @@ const Index = () => {
           
           {/* Hero Content */}
           <div className="relative">
-            <h1 className="font-mono text-6xl font-semibold tracking-tight text-foreground mb-6 mx-0 my-0 py-0 px-0">
-              Dotted Surface
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed mx-0 py-[9px]">
-              Experience the beauty of animated particles dancing in perfect harmony. 
-              Toggle between light and dark themes to see the magic unfold.
-            </p>
+            <h1 className="font-mono text-6xl font-semibold tracking-tight text-foreground mb-6 mx-0 my-0 px-0 py-[14px]">Noctana Labs</h1>
+            <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed px-0 my-0 py-0 mx-0">AI that works while you sleep.</p>
           </div>
           
           {/* Decorative Elements */}
