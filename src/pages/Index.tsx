@@ -1,11 +1,12 @@
 import { DottedSurface } from "@/components/ui/dotted-surface";
 import { RotatingText } from "@/components/ui/rotating-text";
+import Navigation from "@/components/ui/navigation";
 import { cn } from '@/lib/utils';
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useMemo, lazy, Suspense, useCallback } from "react";
 
 // Lazy load sections for better performance
-const AboutSection = lazy(() => import("@/components/sections/AboutSection"));
+const ServicesSection = lazy(() => import("@/components/sections/ServicesSection"));
 const FeaturesSection = lazy(() => import("@/components/sections/FeaturesSection"));
 const StatisticsSection = lazy(() => import("@/components/sections/StatisticsSection"));
 const PricingSection = lazy(() => import("@/components/sections/PricingSection"));
@@ -46,7 +47,8 @@ const Index = () => {
           {/* Animated Dotted Surface Background */}
           <DottedSurface />
           
-          {/* Theme Toggle Button */}
+          {/* Navigation */}
+          <Navigation />
           
           {/* Main Content */}
           <div className="relative z-10 flex h-screen items-center justify-center">
@@ -74,7 +76,7 @@ const Index = () => {
       {/* Content Sections with optimized lazy loading */}
       <div className="relative z-20">
         <Suspense fallback={<LoadingFallback height="h-[500px]" />}>
-          <AboutSection />
+          <ServicesSection />
         </Suspense>
 
         <Suspense fallback={<LoadingFallback />}>
