@@ -36,7 +36,7 @@ const pricingPlans = [
 
 const PricingSection = () => {
   return (
-    <section className="py-24 px-8 bg-background">{/* Completely opaque */}
+    <section className="py-24 px-8 bg-background/80 backdrop-blur-sm">{/* Semi-transparent background */}
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
