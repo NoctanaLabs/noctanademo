@@ -79,7 +79,8 @@ const PricingSection = () => {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
               whileHover={{ 
-                y: -8,
+                y: -12,
+                scale: 1.02,
                 transition: { duration: 0.3 }
               }}
               className="group relative"
@@ -91,23 +92,23 @@ const PricingSection = () => {
                   transition={{ duration: 0.5, delay: 0.5 }}
                   className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10"
                 >
-                  <div className="flex items-center gap-1 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium">
+                  <div className="flex items-center gap-1 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium shadow-elegant">
                     <Star className="w-4 h-4 fill-current" />
                     Most Popular
                   </div>
                 </motion.div>
               )}
               
-              <Card className={`h-80 transition-all duration-300 hover:shadow-elegant border-border/50 hover:border-primary/20 ${
-                plan.popular ? 'border-primary/30 shadow-glow' : ''
+              <Card className={`h-96 transition-all duration-300 bg-card/50 backdrop-blur-sm border-border/30 hover:border-primary/40 hover:shadow-glow group-hover:bg-card/70 ${
+                plan.popular ? 'border-primary/40 shadow-glow bg-card/60' : ''
               }`}>
-                <CardHeader className="text-center pb-4">
-                  <CardTitle className="text-xl font-semibold mb-2">
+                <CardHeader className="text-center pb-6 pt-8">
+                  <CardTitle className="text-2xl font-bold tracking-tight mb-4 text-foreground">
                     {plan.name}
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  <ul className="space-y-3">
+                <CardContent className="px-8 pb-8">
+                  <ul className="space-y-4">
                     {plan.features.map((feature, featureIndex) => (
                       <motion.li
                         key={featureIndex}
@@ -115,10 +116,12 @@ const PricingSection = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.4, delay: 0.6 + featureIndex * 0.1 }}
                         viewport={{ once: true }}
-                        className="flex items-center gap-3"
+                        className="flex items-start gap-3"
                       >
-                        <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                        <span className="text-muted-foreground">{feature}</span>
+                        <div className="flex-shrink-0 w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center mt-0.5">
+                          <Check className="w-3 h-3 text-primary" />
+                        </div>
+                        <span className="text-muted-foreground leading-relaxed">{feature}</span>
                       </motion.li>
                     ))}
                   </ul>
