@@ -92,7 +92,7 @@ const ServicesSection = memo(() => {
           viewport={{ once: true }}
           className="text-center"
         >
-          <div className="p-8 bg-gradient-primary rounded-2xl text-primary-foreground">
+          <div className="p-8 bg-primary-foreground border-2 border-primary rounded-2xl text-primary">
             <h3 className="text-2xl font-semibold mb-4">
               Ready to Transform Your Business?
             </h3>
