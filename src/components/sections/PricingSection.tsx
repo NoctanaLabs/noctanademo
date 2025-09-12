@@ -117,12 +117,12 @@ const PricingSection = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.4, delay: 0.6 + featureIndex * 0.1 }}
                         viewport={{ once: true }}
-                        className="flex items-start gap-3 justify-center"
+                        className="flex items-start gap-3"
                       >
                         <div className="flex-shrink-0 w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center mt-0.5">
                           <Check className="w-3 h-3 text-primary" />
                         </div>
-                        <span className="text-muted-foreground leading-relaxed text-center">{feature}</span>
+                        <span className="text-muted-foreground leading-relaxed text-left">{feature}</span>
                       </motion.li>
                     ))}
                   </ul>
