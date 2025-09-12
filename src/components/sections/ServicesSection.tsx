@@ -28,7 +28,7 @@ const services = [
 
 const ServicesSection = memo(() => {
   return (
-    <section className="py-24 px-8 bg-gradient-to-b from-background to-muted/30">
+    <section className="py-24 px-8 bg-gradient-to-b from-muted/30 to-background">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
