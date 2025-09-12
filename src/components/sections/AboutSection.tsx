@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { Bot, BarChart3, Puzzle } from "lucide-react";
 
 const AboutSection = () => {
   return (
@@ -41,11 +42,11 @@ const AboutSection = () => {
               className="p-8 rounded-2xl bg-gradient-subtle border border-border/50 space-y-4 cursor-pointer hover-scale transition-all duration-300 hover:shadow-elegant"
             >
               <motion.div 
-                whileHover={{ rotate: 360 }}
+                whileHover={{ rotate: 360, scale: 1.1 }}
                 transition={{ duration: 0.6 }}
                 className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center"
               >
-                <div className="w-6 h-6 bg-primary/60 rounded-sm"></div>
+                <Bot className="w-6 h-6 text-primary" />
               </motion.div>
               <h3 className="text-xl font-semibold text-foreground">AI Automation</h3>
               <p className="text-muted-foreground">Streamline repetitive tasks and boost efficiency with intelligent automation workflows.</p>
@@ -61,11 +62,11 @@ const AboutSection = () => {
               className="p-8 rounded-2xl bg-gradient-subtle border border-border/50 space-y-4 cursor-pointer hover-scale transition-all duration-300 hover:shadow-elegant"
             >
               <motion.div 
-                whileHover={{ scale: 1.2 }}
+                whileHover={{ scale: 1.2, y: -2 }}
                 transition={{ duration: 0.3 }}
                 className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center"
               >
-                <div className="w-6 h-6 bg-primary/60 rounded-full"></div>
+                <BarChart3 className="w-6 h-6 text-primary" />
               </motion.div>
               <h3 className="text-xl font-semibold text-foreground">Smart Analytics</h3>
               <p className="text-muted-foreground">Transform data into actionable insights with advanced AI-powered analytics and reporting.</p>
@@ -81,11 +82,11 @@ const AboutSection = () => {
               className="p-8 rounded-2xl bg-gradient-subtle border border-border/50 space-y-4 cursor-pointer hover-scale transition-all duration-300 hover:shadow-elegant"
             >
               <motion.div 
-                whileHover={{ rotate: 45 }}
-                transition={{ duration: 0.3 }}
+                whileHover={{ rotate: 180, scale: 1.1 }}
+                transition={{ duration: 0.5 }}
                 className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center"
               >
-                <div className="w-6 h-6 bg-primary/60 rounded-md rotate-45"></div>
+                <Puzzle className="w-6 h-6 text-primary" />
               </motion.div>
               <h3 className="text-xl font-semibold text-foreground">Custom Solutions</h3>
               <p className="text-muted-foreground">Tailored AI solutions designed specifically for your unique business challenges.</p>
