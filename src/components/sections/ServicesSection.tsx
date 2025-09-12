@@ -101,7 +101,7 @@ const ServicesSection = memo(() => {
               Let's discuss how our AI solutions can streamline your operations and boost efficiency.
             </p>
             <StarBorder as={Link} to="/contact" className="group">
-              Get Started Today
+              Get Started
               <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </StarBorder>
           </div>
