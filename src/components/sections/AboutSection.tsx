@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 const AboutSection = () => {
   return (
-    <section className="py-24 px-8 bg-muted/25 backdrop-blur-sm">{/* 50% less opaque */}
+    <section className="py-24 px-8 bg-muted/50 backdrop-blur-sm">{/* Lighter muted background */}
       <div className="max-w-6xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Text Content */}
