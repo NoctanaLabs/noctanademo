@@ -59,6 +59,7 @@ const PricingSection = () => {
             viewport={{ once: true }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            className="flex justify-center"
           >
             <Button 
               size="lg"
