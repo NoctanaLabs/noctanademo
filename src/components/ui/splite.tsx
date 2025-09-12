@@ -1,26 +1,70 @@
 'use client'
 
-import { Suspense, lazy } from 'react'
+import { Suspense, lazy, memo, useCallback, useState } from 'react'
+import { cn } from '@/lib/utils'
+
 const Spline = lazy(() => import('@splinetool/react-spline'))
 
 interface SplineSceneProps {
   scene: string
   className?: string
+  fallbackHeight?: string
 }
 
-export function SplineScene({ scene, className }: SplineSceneProps) {
+export const SplineScene = memo(function SplineScene({ 
+  scene, 
+  className, 
+  fallbackHeight = "h-96" 
+}: SplineSceneProps) {
+  const [isLoaded, setIsLoaded] = useState(false)
+  const [hasError, setHasError] = useState(false)
+
+  const handleLoad = useCallback(() => {
+    setIsLoaded(true)
+  }, [])
+
+  const handleError = useCallback(() => {
+    setHasError(true)
+  }, [])
+
+  if (hasError) {
+    return (
+      <div className={cn("w-full flex items-center justify-center bg-muted/20 rounded-lg", fallbackHeight, className)}>
+        <div className="text-center space-y-2">
+          <div className="w-12 h-12 mx-auto bg-muted/40 rounded-lg" />
+          <p className="text-sm text-muted-foreground">3D Scene Unavailable</p>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <Suspense 
       fallback={
-        <div className="w-full h-full flex items-center justify-center">
-          <span className="loader"></span>
+        <div className={cn("w-full flex items-center justify-center", fallbackHeight, className)}>
+          <div className="animate-pulse space-y-2">
+            <div className="w-8 h-8 bg-primary/20 rounded-full animate-bounce" />
+            <p className="text-xs text-muted-foreground">Loading 3D Scene...</p>
+          </div>
         </div>
       }
     >
-      <Spline
-        scene={scene}
-        className={className}
-      />
+      <div className={cn("relative", className)}>
+        {!isLoaded && (
+          <div className="absolute inset-0 flex items-center justify-center bg-background/80 backdrop-blur-sm z-10">
+            <div className="animate-pulse space-y-2">
+              <div className="w-8 h-8 bg-primary/20 rounded-full animate-bounce mx-auto" />
+              <p className="text-xs text-muted-foreground">Loading 3D Scene...</p>
+            </div>
+          </div>
+        )}
+        <Spline
+          scene={scene}
+          className={className}
+          onLoad={handleLoad}
+          onError={handleError}
+        />
+      </div>
     </Suspense>
   )
-}
+})

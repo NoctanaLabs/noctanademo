@@ -2,7 +2,7 @@ import { DottedSurface } from "@/components/ui/dotted-surface";
 import { RotatingText } from "@/components/ui/rotating-text";
 import { cn } from '@/lib/utils';
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useMemo, lazy, Suspense } from "react";
+import { useRef, useMemo, lazy, Suspense, useCallback } from "react";
 
 // Lazy load sections for better performance
 const AboutSection = lazy(() => import("@/components/sections/AboutSection"));
@@ -29,6 +29,11 @@ const Index = () => {
     ["Sleep", "Build", "Innovate", "Lead", "Revolutionise", "Dream", "Achieve", "Develop"], 
     []
   );
+
+  // Optimized loading fallback component
+  const LoadingFallback = useCallback(({ height = "h-96" }: { height?: string }) => (
+    <div className={cn("animate-pulse bg-gradient-to-r from-muted/30 to-muted/50 rounded-lg", height)} />
+  ), []);
 
   return (
     <div className="relative bg-background">
@@ -66,21 +71,21 @@ const Index = () => {
         </motion.div>
       </div>
 
-      {/* Content Sections with lazy loading */}
+      {/* Content Sections with optimized lazy loading */}
       <div className="relative z-20">
-        <Suspense fallback={<div className="h-96 animate-pulse bg-muted/50" />}>
+        <Suspense fallback={<LoadingFallback height="h-[500px]" />}>
           <AboutSection />
         </Suspense>
 
-        <Suspense fallback={<div className="h-96 animate-pulse bg-muted/50" />}>
+        <Suspense fallback={<LoadingFallback />}>
           <FeaturesSection />
         </Suspense>
 
-        <Suspense fallback={<div className="h-96 animate-pulse bg-muted/50" />}>
+        <Suspense fallback={<LoadingFallback />}>
           <StatisticsSection />
         </Suspense>
 
-        <Suspense fallback={<div className="h-96 animate-pulse bg-muted/50" />}>
+        <Suspense fallback={<LoadingFallback height="h-[600px]" />}>
           <PricingSection />
         </Suspense>
       </div>
