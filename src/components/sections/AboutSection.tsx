@@ -1,68 +1,74 @@
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 const AboutSection = () => {
   return (
-    <section className="py-24 px-8 bg-muted/50 backdrop-blur-sm">{/* Lighter muted background */}
+    <section className="py-24 px-8 bg-muted/50 backdrop-blur-sm">
       <div className="max-w-6xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Text Content */}
+        <div className="text-center space-y-16">
+          {/* Services Header */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true }}
-            className="space-y-8"
+            className="space-y-6"
           >
             <h2 className="text-4xl lg:text-5xl font-semibold tracking-tight text-foreground">
-              Efficiency Without Extra Hands
+              Our Services
             </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              From repetitive admin tasks to complex decision-making support, our AI workflows and agents adapt to your business and scale with your needs. Faster operations, lower costs, and smarter outcomes—without adding headcount.
+            <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+              Discover how our AI solutions can transform your business operations and drive unprecedented growth.
             </p>
           </motion.div>
 
-          {/* Animated Illustration */}
+          {/* Services Grid */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
             viewport={{ once: true }}
-            className="relative"
+            className="grid md:grid-cols-3 gap-8"
           >
-            <motion.div
-              animate={{ 
-                y: [0, -10, 0],
-                rotate: [0, 2, 0]
-              }}
-              transition={{ 
-                duration: 6,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-              className="relative"
-            >
-              <div className="w-full h-96 rounded-2xl bg-gradient-subtle border border-border/50 p-8 flex items-center justify-center overflow-hidden">
-                {/* Geometric shapes representing AI/automation */}
-                <div className="relative w-full h-full">
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                    className="absolute top-8 right-8 w-16 h-16 border-2 border-primary/30 rounded-full"
-                  />
-                  <motion.div
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute bottom-12 left-12 w-12 h-12 bg-primary/20 rounded-lg"
-                  />
-                  <motion.div
-                    animate={{ x: [0, 20, 0] }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 border border-accent/30 rounded-2xl bg-accent/10"
-                  />
-                </div>
+            {/* Service 1 */}
+            <div className="p-8 rounded-2xl bg-gradient-subtle border border-border/50 space-y-4">
+              <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center">
+                <div className="w-6 h-6 bg-primary/60 rounded-sm"></div>
               </div>
-            </motion.div>
+              <h3 className="text-xl font-semibold text-foreground">AI Automation</h3>
+              <p className="text-muted-foreground">Streamline repetitive tasks and boost efficiency with intelligent automation workflows.</p>
+            </div>
+
+            {/* Service 2 */}
+            <div className="p-8 rounded-2xl bg-gradient-subtle border border-border/50 space-y-4">
+              <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center">
+                <div className="w-6 h-6 bg-primary/60 rounded-full"></div>
+              </div>
+              <h3 className="text-xl font-semibold text-foreground">Smart Analytics</h3>
+              <p className="text-muted-foreground">Transform data into actionable insights with advanced AI-powered analytics and reporting.</p>
+            </div>
+
+            {/* Service 3 */}
+            <div className="p-8 rounded-2xl bg-gradient-subtle border border-border/50 space-y-4">
+              <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center">
+                <div className="w-6 h-6 bg-primary/60 rounded-md rotate-45"></div>
+              </div>
+              <h3 className="text-xl font-semibold text-foreground">Custom Solutions</h3>
+              <p className="text-muted-foreground">Tailored AI solutions designed specifically for your unique business challenges.</p>
+            </div>
+          </motion.div>
+
+          {/* CTA Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+            viewport={{ once: true }}
+          >
+            <Button size="lg" className="px-8 py-6 text-lg">
+              Talk to our AI
+            </Button>
           </motion.div>
         </div>
       </div>
