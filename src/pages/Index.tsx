@@ -1,6 +1,7 @@
 import { DottedSurface } from "@/components/ui/dotted-surface";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { RotatingText } from "@/components/ui/rotating-text";
+import { AnimatedText } from "@/components/ui/animated-shiny-text";
 import { cn } from '@/lib/utils';
 
 const Index = () => {
@@ -19,7 +20,13 @@ const Index = () => {
           
           {/* Hero Content */}
           <div className="relative">
-            <h1 className="font-mono text-4xl sm:text-5x2 md:text-6xl lg:text-7xl font-semibold tracking-tight text-foreground mb-6 mx-0 my-0 px-0 py-[14px]">Noctana Labs</h1>
+            <AnimatedText 
+              text="Noctana Labs" 
+              gradientAnimationDuration={5}
+              className="py-0 mb-6"
+              textClassName="font-mono text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight"
+              gradientColors="linear-gradient(90deg, hsl(var(--foreground)), hsl(var(--primary)), hsl(var(--foreground)))"
+            />
             <p className="text-lg sm:text-lxl md:text-2xl text-muted-foreground max-w-2xl leading-relaxed px-0 -mt-[30px] py-0 mx-0 whitespace-nowrap">
               AI that works while you{" "}
               <RotatingText words={["Sleep", "Build", "Innovate", "Lead", "Revolutionise", "Dream", "Achieve", "Develop"]} className="text-lg sm:text-xl md:text-2xl text-primary font-medium" />
