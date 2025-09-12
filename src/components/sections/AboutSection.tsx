@@ -44,7 +44,7 @@ const AboutSection = () => {
             >
               <SplineScene 
                 scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-                className="w-full h-96 rounded-2xl"
+                className="w-full h-full min-h-[500px] rounded-2xl"
               />
             </motion.div>
           </motion.div>
