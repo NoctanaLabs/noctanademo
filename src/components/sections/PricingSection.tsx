@@ -80,15 +80,15 @@ const PricingSection = () => {
               viewport={{ once: true }}
               whileHover={{ 
                 y: -12,
-                scale: 1.02,
+                scale: plan.popular ? 1.12 : 1.02,
                 transition: { duration: 0.3 }
               }}
-              className="group relative"
+              className={`group relative ${plan.popular ? 'scale-110' : ''}`}
             >
               {plan.popular && (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
+                  animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: 0.5 }}
                   className="absolute -top-6 inset-x-0 z-10 flex justify-center"
                 >
