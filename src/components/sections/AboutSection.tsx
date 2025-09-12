@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Bot, BarChart3, Puzzle } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const AboutSection = () => {
   return (
@@ -105,9 +106,11 @@ const AboutSection = () => {
               whileTap={{ scale: 0.98 }}
               transition={{ duration: 0.15 }}
             >
-              <Button size="lg" className="px-8 py-6 text-lg transition-all duration-200">
-                Talk to our AI
-              </Button>
+              <Link to="/contact">
+                <Button size="lg" className="px-8 py-6 text-lg transition-all duration-200">
+                  Talk to our AI
+                </Button>
+              </Link>
             </motion.div>
           </motion.div>
         </div>
