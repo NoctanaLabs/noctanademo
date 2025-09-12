@@ -75,9 +75,8 @@ export const TextScramble = memo(function TextScramble({
 
   useEffect(() => {
     if (!trigger) return;
-
     scramble();
-  }, [trigger, scramble]);
+  }, [trigger]);
 
   return (
     <MotionComponent className={className} {...props}>
