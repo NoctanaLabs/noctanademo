@@ -2,17 +2,31 @@ import { DottedSurface } from "@/components/ui/dotted-surface";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { RotatingText } from "@/components/ui/rotating-text";
 import { cn } from '@/lib/utils';
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import AboutSection from "@/components/sections/AboutSection";
 import FeaturesSection from "@/components/sections/FeaturesSection";
 import StatisticsSection from "@/components/sections/StatisticsSection";
 import PricingSection from "@/components/sections/PricingSection";
 
 const Index = () => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"]
+  });
+
+  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
+
   return (
     <div className="relative bg-background">
-      {/* Hero Section with Sticky Effect */}
-      <div className="relative h-screen overflow-hidden">
-        <div className="sticky top-0 h-screen">
+      {/* Hero Section with Fade Animation */}
+      <div ref={ref} className="relative h-screen overflow-hidden">
+        <motion.div 
+          style={{ opacity, scale }}
+          className="fixed top-0 left-0 w-full h-screen z-10"
+        >
           {/* Animated Dotted Surface Background */}
           <DottedSurface />
           
@@ -35,10 +49,10 @@ const Index = () => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
 
-      {/* Content Sections with relative positioning to slide over hero */}
+      {/* Content Sections */}
       <div className="relative z-20 bg-background">
         {/* About Section */}
         <AboutSection />
