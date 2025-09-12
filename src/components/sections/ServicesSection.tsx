@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { StarBorder } from "@/components/ui/star-border";
 import { Bot, Workflow, BarChart, Zap, ArrowRight } from "lucide-react";
 import { memo } from "react";
 
@@ -99,14 +99,10 @@ const ServicesSection = memo(() => {
             <p className="text-lg opacity-90 mb-6 max-w-2xl mx-auto">
               Let's discuss how our AI solutions can streamline your operations and boost efficiency.
             </p>
-            <Button 
-              size="lg" 
-              variant="secondary"
-              className="group"
-            >
+            <StarBorder className="group">
               Get Started Today
               <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Button>
+            </StarBorder>
           </div>
         </motion.div>
       </div>
