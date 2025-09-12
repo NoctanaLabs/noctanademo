@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { StarBorder } from "@/components/ui/star-border";
 import { Bot, Workflow, BarChart, Zap, ArrowRight } from "lucide-react";
 import { memo } from "react";
+import { Link } from "react-router-dom";
 
 const services = [
   {
@@ -99,7 +100,7 @@ const ServicesSection = memo(() => {
             <p className="text-lg opacity-90 mb-6 max-w-2xl mx-auto">
               Let's discuss how our AI solutions can streamline your operations and boost efficiency.
             </p>
-            <StarBorder className="group">
+            <StarBorder as={Link} to="/contact" className="group">
               Get Started Today
               <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </StarBorder>

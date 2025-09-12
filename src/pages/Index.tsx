@@ -1,6 +1,5 @@
 import { DottedSurface } from "@/components/ui/dotted-surface";
 import { RotatingText } from "@/components/ui/rotating-text";
-import Navigation from "@/components/ui/navigation";
 import { cn } from '@/lib/utils';
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useMemo, lazy, Suspense, useCallback } from "react";
@@ -46,9 +45,6 @@ const Index = () => {
         >
           {/* Animated Dotted Surface Background */}
           <DottedSurface />
-          
-          {/* Navigation */}
-          <Navigation />
           
           {/* Main Content */}
           <div className="relative z-10 flex h-screen items-center justify-center">

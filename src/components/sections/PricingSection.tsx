@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Check, Star } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const pricingPlans = [
   {
@@ -62,10 +63,11 @@ const PricingSection = () => {
             className="flex justify-center"
           >
             <Button 
+              asChild
               size="lg"
               className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-elegant hover:shadow-glow transition-all duration-300 text-lg px-8 py-6 rounded-full"
             >
-              Unlock Your AI-Powered Workflow
+              <Link to="/contact">Unlock Your AI-Powered Workflow</Link>
             </Button>
           </motion.div>
         </motion.div>
