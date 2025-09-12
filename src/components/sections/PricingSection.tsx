@@ -35,7 +35,7 @@ const pricingPlans = [
 
 const PricingSection = () => {
   return (
-    <section className="py-24 px-8 bg-muted/30 backdrop-blur-sm">{/* Same as section 3 */}
+    <section className="py-24 px-8 bg-muted/45 backdrop-blur-sm">{/* Same as section 3 */}
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
