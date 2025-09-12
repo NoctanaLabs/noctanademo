@@ -90,9 +90,9 @@ const PricingSection = () => {
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: 0.5 }}
-                  className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10"
+                  className="absolute -top-4 left-1/2 -translate-x-1/2 z-10"
                 >
-                  <div className="flex items-center gap-1 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm font-medium shadow-elegant">
+                  <div className="flex items-center justify-center gap-1 bg-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-medium shadow-elegant">
                     <Star className="w-4 h-4 fill-current" />
                     Most Popular
                   </div>
