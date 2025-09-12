@@ -107,7 +107,7 @@ const PricingSection = () => {
                     {plan.name}
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="px-8 pb-8">
+                <CardContent className="px-9 pb-8">
                   <ul className="space-y-4">
                     {plan.features.map((feature, featureIndex) => (
                       <motion.li
