@@ -4,7 +4,7 @@ import { memo } from "react";
 
 const AboutSection = memo(() => {
   return (
-    <section className="py-24 px-8 bg-muted/50 backdrop-blur-sm">
+    <section className="py-19 px-8 bg-muted/50 backdrop-blur-sm">
       <div className="max-w-6xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Text Content */}
