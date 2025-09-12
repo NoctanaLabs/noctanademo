@@ -16,7 +16,7 @@ const Index = () => {
     offset: ["start start", "end start"]
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.5]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
 
   return (
@@ -53,7 +53,7 @@ const Index = () => {
       </div>
 
       {/* Content Sections */}
-      <div className="relative z-20 bg-background">
+      <div className="relative z-20">
         {/* About Section */}
         <AboutSection />
 
