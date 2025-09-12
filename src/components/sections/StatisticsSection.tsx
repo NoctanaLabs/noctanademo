@@ -55,7 +55,7 @@ const AnimatedCounter = ({ value, suffix }: { value: number; suffix: string }) =
 
 const StatisticsSection = () => {
   return (
-    <section className="py-24 px-8">
+    <section className="py-24 px-8 bg-gradient-to-b from-background/60 via-background/30 to-black/80">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
