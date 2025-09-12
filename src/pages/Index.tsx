@@ -18,6 +18,7 @@ const Index = () => {
 
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.5]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
+  const textOpacity = useTransform(scrollYProgress, [0.3, 0.8], [1, 0]);
 
   return (
     <div className="relative bg-background">
@@ -34,7 +35,10 @@ const Index = () => {
           
           {/* Main Content */}
           <div className="relative z-10 flex h-screen items-center justify-center">
-            <div className="text-center space-y-4 -mt-[70px] sm:-mt-[90px] md:-mt-[110px] lg:-mt-[130px] px-[40px]">
+            <motion.div 
+              style={{ opacity: textOpacity }}
+              className="text-center space-y-4 -mt-[70px] sm:-mt-[90px] md:-mt-[110px] lg:-mt-[130px] px-[40px]"
+            >
               {/* Elegant glow effect */}
               <div aria-hidden="true" className={cn('pointer-events-none absolute -top-10 left-1/2 size-full -translate-x-1/2 rounded-full', 'bg-gradient-glow', 'blur-[30px]')} />
               
@@ -47,7 +51,7 @@ const Index = () => {
                   .
                 </p>
               </div>
-            </div>
+            </motion.div>
           </div>
         </motion.div>
       </div>
