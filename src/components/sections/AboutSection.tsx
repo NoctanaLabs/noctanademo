@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const AboutSection = () => {
   return (
-    <section className="py-24 px-8 bg-muted/20 backdrop-blur-sm">
+    <section className="py-24 px-8">
       <div className="max-w-6xl mx-auto">
         <div className="text-center space-y-16">
           {/* Services Header */}
