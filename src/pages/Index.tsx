@@ -22,7 +22,7 @@ const Index = () => {
             <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed px-0 -mt-[30px] py-0 mx-0">
               AI that works while you{" "}
               <RotatingText 
-                words={["sleep", "build", "innovate", "lead", "revolutionise"]}
+                words={["Sleep", "Build", "Innovate", "Lead", "Revolutionise", "Dream", "Achieve", "Develop"]}
                 className="text-xl text-primary font-medium"
               />
               .
