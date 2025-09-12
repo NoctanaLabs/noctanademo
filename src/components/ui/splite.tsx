@@ -44,22 +44,14 @@ export const SplineScene = memo(function SplineScene({
     <Suspense 
       fallback={
         <div className={cn("w-full flex items-center justify-center", fallbackHeight, className)}>
-          <div className="animate-pulse space-y-2">
-            <div className="w-8 h-8 bg-primary/20 rounded-full animate-bounce" />
+          <div className="space-y-2">
+            <div className="w-8 h-8 bg-primary/20 rounded-full mx-auto" />
             <p className="text-xs text-muted-foreground">Loading 3D Scene...</p>
           </div>
         </div>
       }
     >
-      <div className={cn("relative", className)}>
-        {!isLoaded && (
-          <div className="absolute inset-0 flex items-center justify-center bg-background/80 backdrop-blur-sm z-10">
-            <div className="animate-pulse space-y-2">
-              <div className="w-8 h-8 bg-primary/20 rounded-full animate-bounce mx-auto" />
-              <p className="text-xs text-muted-foreground">Loading 3D Scene...</p>
-            </div>
-          </div>
-        )}
+      <div className={cn("relative scale-130", className)}>
         <Spline
           scene={scene}
           className={reducedQuality ? cn(className, "scale-75 origin-center") : className}
