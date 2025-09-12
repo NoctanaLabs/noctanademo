@@ -4,7 +4,7 @@ import { RotatingText } from "@/components/ui/rotating-text";
 import { cn } from '@/lib/utils';
 
 const Index = () => {
-  return <div className="relative min-h-screen overflow-hidden bg-background">
+  return <div className="relative min-h-screen min-w-[800px] overflow-hidden bg-background">
       {/* Animated Dotted Surface Background */}
       <DottedSurface />
       
