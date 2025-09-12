@@ -1,4 +1,4 @@
-import { useState, useEffect, memo } from 'react';
+import { useState, useEffect, useRef, useCallback, memo } from 'react';
 import { TextScramble } from './text-scramble';
 
 interface RotatingTextProps {
@@ -10,26 +10,29 @@ interface RotatingTextProps {
 export const RotatingText = memo(function RotatingText({ words, interval = 4000, className }: RotatingTextProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [trigger, setTrigger] = useState(true);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const timeoutRef = useRef<number | null>(null);
+
+  const scheduleNext = useCallback(() => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = window.setTimeout(() => {
+      setCurrentIndex((prev) => (prev + 1) % words.length);
+      setTrigger((prev) => !prev);
+    }, interval);
+  }, [interval, words.length]);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      if (!isAnimating) {
-        setCurrentIndex((prev) => (prev + 1) % words.length);
-        setTrigger(prev => !prev);
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
       }
-    }, interval);
-
-    return () => clearInterval(timer);
-  }, [words.length, interval, isAnimating]);
+    };
+  }, []);
 
   const handleScrambleComplete = () => {
-    setIsAnimating(false);
+    scheduleNext();
   };
-
-  useEffect(() => {
-    setIsAnimating(true);
-  }, [trigger]);
 
   return (
     <TextScramble
