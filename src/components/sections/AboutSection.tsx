@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import { SplineScene } from "@/components/ui/splite";
+import { memo } from "react";
 
-const AboutSection = () => {
+const AboutSection = memo(() => {
   return (
     <section className="py-24 px-8 bg-muted/50 backdrop-blur-sm">
       <div className="max-w-6xl mx-auto">
@@ -52,6 +53,6 @@ const AboutSection = () => {
       </div>
     </section>
   );
-};
+});
 
 export default AboutSection;

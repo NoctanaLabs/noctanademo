@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { TextScramble } from './text-scramble';
 
 interface RotatingTextProps {
@@ -7,7 +7,7 @@ interface RotatingTextProps {
   className?: string;
 }
 
-export function RotatingText({ words, interval = 4000, className }: RotatingTextProps) {
+export const RotatingText = memo(function RotatingText({ words, interval = 4000, className }: RotatingTextProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [trigger, setTrigger] = useState(true);
 
@@ -31,4 +31,4 @@ export function RotatingText({ words, interval = 4000, className }: RotatingText
       {words[currentIndex]}
     </TextScramble>
   );
-}
+});
