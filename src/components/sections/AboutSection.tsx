@@ -37,19 +37,19 @@ const AboutSection = () => {
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.05 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
               whileHover={{ scale: 1.02, y: -4 }}
               viewport={{ once: true }}
-              className="group p-8 rounded-3xl bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-sm border border-border/30 shadow-lg hover:shadow-xl space-y-6 cursor-pointer transition-all duration-200"
+              className="group p-8 rounded-3xl bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-sm border border-border/30 shadow-lg hover:shadow-xl space-y-6 cursor-pointer transition-all duration-300"
             >
               <motion.div 
-                whileHover={{ rotate: 360, scale: 1.05 }}
-                transition={{ duration: 0.3 }}
-                className="w-16 h-16 bg-gradient-to-br from-primary/30 to-primary/10 rounded-2xl flex items-center justify-center shadow-inner transition-shadow duration-200 mx-auto"
+                whileHover={{ scale: 1.05, y: -2 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className="w-16 h-16 bg-gradient-to-br from-primary/30 to-primary/10 rounded-2xl flex items-center justify-center shadow-inner transition-shadow duration-300 mx-auto"
               >
                 <Bot className="w-8 h-8 text-primary" />
               </motion.div>
-              <h3 className="text-xl font-semibold text-foreground transition-colors duration-200">AI Automation</h3>
+              <h3 className="text-xl font-semibold text-foreground transition-colors duration-300">AI Automation</h3>
               <p className="text-muted-foreground leading-relaxed">Streamline repetitive tasks and boost efficiency with intelligent automation workflows.</p>
             </motion.div>
 
@@ -57,19 +57,19 @@ const AboutSection = () => {
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
               whileHover={{ scale: 1.02, y: -4 }}
               viewport={{ once: true }}
-              className="group p-8 rounded-3xl bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-sm border border-border/30 shadow-lg hover:shadow-xl space-y-6 cursor-pointer transition-all duration-200"
+              className="group p-8 rounded-3xl bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-sm border border-border/30 shadow-lg hover:shadow-xl space-y-6 cursor-pointer transition-all duration-300"
             >
               <motion.div 
-                whileHover={{ scale: 1.1, y: -2 }}
-                transition={{ duration: 0.2 }}
-                className="w-16 h-16 bg-gradient-to-br from-primary/30 to-primary/10 rounded-2xl flex items-center justify-center shadow-inner transition-shadow duration-200 mx-auto"
+                whileHover={{ scale: 1.05, y: -2 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className="w-16 h-16 bg-gradient-to-br from-primary/30 to-primary/10 rounded-2xl flex items-center justify-center shadow-inner transition-shadow duration-300 mx-auto"
               >
                 <BarChart3 className="w-8 h-8 text-primary" />
               </motion.div>
-              <h3 className="text-xl font-semibold text-foreground transition-colors duration-200">Smart Analytics</h3>
+              <h3 className="text-xl font-semibold text-foreground transition-colors duration-300">Smart Analytics</h3>
               <p className="text-muted-foreground leading-relaxed">Transform data into actionable insights with advanced AI-powered analytics and reporting.</p>
             </motion.div>
 
@@ -77,19 +77,19 @@ const AboutSection = () => {
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.15 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
               whileHover={{ scale: 1.02, y: -4 }}
               viewport={{ once: true }}
-              className="group p-8 rounded-3xl bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-sm border border-border/30 shadow-lg hover:shadow-xl space-y-6 cursor-pointer transition-all duration-200"
+              className="group p-8 rounded-3xl bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-sm border border-border/30 shadow-lg hover:shadow-xl space-y-6 cursor-pointer transition-all duration-300"
             >
               <motion.div 
-                whileHover={{ rotate: 180, scale: 1.05 }}
-                transition={{ duration: 0.3 }}
-                className="w-16 h-16 bg-gradient-to-br from-primary/30 to-primary/10 rounded-2xl flex items-center justify-center shadow-inner transition-shadow duration-200 mx-auto"
+                whileHover={{ scale: 1.05, y: -2 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className="w-16 h-16 bg-gradient-to-br from-primary/30 to-primary/10 rounded-2xl flex items-center justify-center shadow-inner transition-shadow duration-300 mx-auto"
               >
                 <Puzzle className="w-8 h-8 text-primary" />
               </motion.div>
-              <h3 className="text-xl font-semibold text-foreground transition-colors duration-200">Custom Solutions</h3>
+              <h3 className="text-xl font-semibold text-foreground transition-colors duration-300">Custom Solutions</h3>
               <p className="text-muted-foreground leading-relaxed">Tailored AI solutions designed specifically for your unique business challenges.</p>
             </motion.div>
           </motion.div>
