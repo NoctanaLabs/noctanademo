@@ -129,9 +129,9 @@ const Contact = () => {
               <div className="p-6 rounded-2xl bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-sm border border-border/30">
                 <h3 className="text-xl font-semibold text-foreground mb-4">Contact Information</h3>
                 <div className="space-y-3 text-muted-foreground">
-                  <p>📧 contact@noctanalabs.com</p>
-                  <p>📞 +65 ---- ----</p>
-                  <p>🏢 Singapore</p>
+                  <p>📧 hello@noctanalabs.com</p>
+                  <p>📞 +1 (555) 123-4567</p>
+                  <p>🏢 San Francisco, CA</p>
                 </div>
               </div>
 
@@ -141,7 +141,7 @@ const Contact = () => {
                   <h3 className="text-xl font-semibold text-foreground">AI Assistant</h3>
                 </div>
                 <p className="text-muted-foreground">
-                  Get instant answers to your questions or book a consultation with us by leaving your details with our AI chat feature above.
+                  Get instant answers to your questions using our AI chat feature above.
                 </p>
               </div>
             </div>
