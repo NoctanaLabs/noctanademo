@@ -131,7 +131,7 @@ const Contact = () => {
                 <div className="space-y-3 text-muted-foreground">
                   <p>📧 contact@noctanalabs.com</p>
                   <p>📞 +65 ---- ----</p>
-                  <p>🏢 Singapore/p>
+                  <p>🏢 Singapore</p>
                 </div>
               </div>
 
