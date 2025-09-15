@@ -13,7 +13,6 @@ const generateSessionId = () => {
   if (typeof crypto !== "undefined" && crypto.randomUUID) {
     return crypto.randomUUID();
   } else {
-    // Fallback for older browsers
     return (
       Math.random().toString(36).substring(2, 10) +
       Math.random().toString(36).substring(2, 10) +
@@ -35,11 +34,14 @@ const Contact = () => {
   const [chatClosed, setChatClosed] = useState(false);
 
   const chatContainerRef = useRef(null);
-
-  // Unique session ID for this chat instance
   const sessionId = useRef(generateSessionId());
 
-  // Scroll to bottom on new messages
+  // Scroll page to top on component mount
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+  // Scroll chat container to bottom on new messages
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTo({
@@ -50,13 +52,12 @@ const Contact = () => {
   }, [messages]);
 
   const handleSendMessage = async () => {
-    if (!inputMessage.trim()) return;
+    if (chatClosed || !inputMessage.trim()) return; // Prevent sending if chat is closed
 
     const userMessage = { id: Date.now(), text: inputMessage, isBot: false };
     setMessages((prev) => [...prev, userMessage]);
     setInputMessage("");
 
-    // Typing indicator
     const typingId = Date.now() + 0.1;
     setMessages((prev) => [...prev, { id: typingId, text: "Typing...", isBot: true }]);
 
@@ -65,8 +66,8 @@ const Contact = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          chatInput: inputMessage, // <-- changed field name
-          sessionId: sessionId.current
+          chatInput: inputMessage,
+          sessionId: sessionId.current,
         }),
       });
 
@@ -88,13 +89,10 @@ const Contact = () => {
       setMessages((prev) => [...prev, botResponse]);
 
       // Close chat if trigger message appears
-      if ((data.text || "")
-        .toLowerCase()
-        .includes("thank you for your interest, we will be in contact with you shortly.")) {
+      if ((data.text || "").toLowerCase().includes("thank you for your interest, we will be in contact with you shortly.")) {
         setChatClosed(true);
       }
     } catch (error) {
-      // Remove typing indicator
       setMessages((prev) => prev.filter((m) => m.id !== typingId));
 
       const errorResponse = {
@@ -139,7 +137,14 @@ const Contact = () => {
             </div>
 
             <div className="flex gap-3">
-              <Input value={inputMessage} onChange={(e) => setInputMessage(e.target.value)} placeholder="Type your message..." onKeyPress={(e) => e.key === "Enter" && handleSendMessage()} className="flex-1" disabled={chatClosed} />
+              <Input
+                value={inputMessage}
+                onChange={(e) => setInputMessage(e.target.value)}
+                placeholder={chatClosed ? "Chat has ended." : "Type your message..."}
+                onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
+                className="flex-1"
+                disabled={chatClosed}
+              />
               <Button onClick={handleSendMessage} size="icon" disabled={chatClosed}><Send className="w-4 h-4" /></Button>
             </div>
           </motion.div>
