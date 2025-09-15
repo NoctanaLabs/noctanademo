@@ -1,24 +1,40 @@
 import { motion } from "framer-motion";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Send, MessageCircle, Bot } from "lucide-react";
 import { Link } from "react-router-dom";
-import { createChat } from '@n8n/chat';
-import '@n8n/chat/dist/style.css';
 
 const Contact = () => {
+  const [messages, setMessages] = useState([
+    { id: 1, text: "Hello! I'm your AI assistant. How can I help you today?", isBot: true }
+  ]);
+  const [inputMessage, setInputMessage] = useState("");
+
+  // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
-
-    createChat({
-      webhookUrl: 'YOUR_PRODUCTION_WEBHOOK_URL',
-      // Change the mode from 'popup' to 'inline'
-      mode: 'inline',
-      // Specify the container element where the chat will be rendered
-      target: '#n8n-chat-container'
-    });
-
   }, []);
+
+  const handleSendMessage = () => {
+    if (!inputMessage.trim()) return;
+    
+    const newMessage = { id: Date.now(), text: inputMessage, isBot: false };
+    setMessages(prev => [...prev, newMessage]);
+    
+    // Simulate AI response
+    setTimeout(() => {
+      const botResponse = { 
+        id: Date.now() + 1, 
+        text: "Thanks for your message! Our team will get back to you soon. Is there anything specific you'd like to know about our AI solutions?", 
+        isBot: true 
+      };
+      setMessages(prev => [...prev, botResponse]);
+    }, 1000);
+    
+    setInputMessage("");
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -52,8 +68,44 @@ const Contact = () => {
               <h2 className="text-2xl font-semibold text-foreground">Chat with AI</h2>
             </div>
 
-            {/* Container for the n8n Chat Widget */}
-            <div id="n8n-chat-container" className="h-96"></div>
+            {/* Chat Messages */}
+            <div className="h-96 bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-sm border border-border/30 rounded-2xl p-6 overflow-y-auto space-y-4">
+              {messages.map((message) => (
+                <motion.div
+                  key={message.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className={`flex ${message.isBot ? 'justify-start' : 'justify-end'}`}
+                >
+                  <div className={`max-w-xs lg:max-w-md px-4 py-3 rounded-2xl ${
+                    message.isBot 
+                      ? 'bg-primary/10 text-foreground border border-primary/20' 
+                      : 'bg-primary text-primary-foreground'
+                  }`}>
+                    <p className="text-sm">{message.text}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Chat Input */}
+            <div className="flex gap-3">
+              <Input
+                value={inputMessage}
+                onChange={(e) => setInputMessage(e.target.value)}
+                placeholder="Type your message..."
+                onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                className="flex-1"
+              />
+              <Button 
+                onClick={handleSendMessage}
+                size="icon"
+                className="transition-all duration-200"
+              >
+                <Send className="w-4 h-4" />
+              </Button>
+            </div>
           </motion.div>
 
           {/* Contact Information */}
@@ -79,7 +131,7 @@ const Contact = () => {
                 <div className="space-y-3 text-muted-foreground">
                   <p>📧 contact@noctanalabs.com</p>
                   <p>📞 +65 ---- ----</p>
-                  <p>🏢 Singapore</p>
+                  <p>🏢 Singapore/p>
                 </div>
               </div>
 
