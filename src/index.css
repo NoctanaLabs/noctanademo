@@ -129,17 +129,17 @@ All colors MUST be HSL.
 }
 
 @layer components {
-  /* Button pulse animation for attention */
-  @keyframes attention-pulse {
-    0%, 70%, 100% {
+  /* Button breathing animation for attention */
+  @keyframes breathing {
+    0%, 100% {
       transform: scale(1);
     }
-    15% {
-      transform: scale(1.05);
+    50% {
+      transform: scale(1.02);
     }
   }
 
   .button-pulse {
-    animation: attention-pulse 15s ease-in-out infinite;
+    animation: breathing 4s ease-in-out infinite;
   }
 }
