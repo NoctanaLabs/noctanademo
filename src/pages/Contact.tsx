@@ -21,6 +21,20 @@ const generateSessionId = () => {
   }
 };
 
+// Cookie helpers
+const setCookie = (name: string, value: string, hours: number) => {
+  const expires = new Date();
+  expires.setTime(expires.getTime() + hours * 60 * 60 * 1000);
+  document.cookie = `${name}=${encodeURIComponent(value)};expires=${expires.toUTCString()};path=/`;
+};
+
+const getCookie = (name: string) => {
+  const matches = document.cookie.match(
+    new RegExp("(?:^|; )" + name.replace(/([.$?*|{}()[]\/+^])/g, "\\$1") + "=([^;]*)")
+  );
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+};
+
 const Contact = () => {
   const [messages, setMessages] = useState([
     {
@@ -36,20 +50,30 @@ const Contact = () => {
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const sessionId = useRef(generateSessionId());
 
-  // Scroll page to top on mount after layout settles
+  // Restore chat state from cookies on mount
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }, 50);
-    return () => clearTimeout(timeout);
+    const savedMessages = getCookie("chat_messages");
+    const savedClosed = getCookie("chat_closed");
+
+    if (savedMessages) setMessages(JSON.parse(savedMessages));
+    if (savedClosed === "true") setChatClosed(true);
+
+    // Scroll page to top after layout
+    setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 50);
   }, []);
+
+  // Save chat state to cookies whenever it changes (1 hour expiry)
+  useEffect(() => {
+    setCookie("chat_messages", JSON.stringify(messages), 1);
+    setCookie("chat_closed", chatClosed.toString(), 1);
+  }, [messages, chatClosed]);
 
   // Scroll chat container to bottom only on new messages
   const initialMount = useRef(true);
   useEffect(() => {
     if (initialMount.current) {
       initialMount.current = false;
-      return; // skip chat scroll on initial load
+      return;
     }
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTo({
