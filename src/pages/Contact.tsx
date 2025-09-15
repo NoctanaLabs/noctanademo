@@ -12,9 +12,30 @@ const Contact = () => {
   ]);
   const [inputMessage, setInputMessage] = useState("");
 
-  // Scroll to top when component mounts
   useEffect(() => {
+    // Scroll to top when component mounts
     window.scrollTo(0, 0);
+
+    // Dynamically inject n8n chat CSS
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css";
+    document.head.appendChild(link);
+
+    // Dynamically import and create n8n chat
+    import("https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js")
+      .then((module) => {
+        module.createChat({
+          webhookUrl: "YOUR_PRODUCTION_WEBHOOK_URL",
+          // Optional: container selector if you want to mount it in a specific div
+          container: "#n8n-chat-container"
+        });
+      })
+      .catch((err) => console.error("Failed to load n8n chat:", err));
+
+    return () => {
+      document.head.removeChild(link);
+    };
   }, []);
 
   const handleSendMessage = () => {
@@ -68,7 +89,10 @@ const Contact = () => {
               <h2 className="text-2xl font-semibold text-foreground">Chat with AI</h2>
             </div>
 
-            {/* Chat Messages */}
+            {/* n8n Chat container */}
+            <div id="n8n-chat-container" className="h-96" />
+
+            {/* Legacy Chat Messages */}
             <div className="h-96 bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-sm border border-border/30 rounded-2xl p-6 overflow-y-auto space-y-4">
               {messages.map((message) => (
                 <motion.div
