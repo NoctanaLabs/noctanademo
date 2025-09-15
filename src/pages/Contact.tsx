@@ -1,18 +1,26 @@
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Send, MessageCircle, Bot } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const N8N_WEBHOOK_URL = "https://n8n.srv998243.hstgr.cloud/webhook/24c7b253-b28f-49d1-810b-c19d56d14030/chat";
+const N8N_WEBHOOK_URL =
+  "https://n8n.srv998243.hstgr.cloud/webhook/24c7b253-b28f-49d1-810b-c19d56d14030/chat";
 
 const Contact = () => {
   const [messages, setMessages] = useState([
-    { id: 1, text: "Hello! I am Noct AI assistant. How may I assist you today?", isBot: true }
+    {
+      id: 1,
+      text: "Hello! I am Noct AI assistant. How may I assist you today?",
+      isBot: true,
+    },
   ]);
   const [inputMessage, setInputMessage] = useState("");
   const [chatClosed, setChatClosed] = useState(false);
+
+  // Ref for chat container
+  const chatContainerRef = useRef(null);
 
   // Load messages from localStorage
   useEffect(() => {
@@ -27,18 +35,28 @@ const Contact = () => {
     localStorage.setItem("chatMessages", JSON.stringify(messages));
   }, [messages]);
 
+  // Scroll to bottom when new messages appear
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTo({
+        top: chatContainerRef.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [messages]);
+
   const handleSendMessage = async () => {
     if (!inputMessage.trim()) return;
 
     const newMessage = { id: Date.now(), text: inputMessage, isBot: false };
-    setMessages(prev => [...prev, newMessage]);
+    setMessages((prev) => [...prev, newMessage]);
     setInputMessage("");
 
     try {
       const res = await fetch(N8N_WEBHOOK_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: inputMessage })
+        body: JSON.stringify({ message: inputMessage }),
       });
 
       const data = await res.json();
@@ -46,21 +64,27 @@ const Contact = () => {
       const botResponse = {
         id: Date.now() + 1,
         text: data.text || "No response from assistant.",
-        isBot: true
+        isBot: true,
       };
-      setMessages(prev => [...prev, botResponse]);
+      setMessages((prev) => [...prev, botResponse]);
 
       // Close chat if trigger message appears
-      if ((data.text || "").toLowerCase().includes("Thank you for your interest, we will be in contact with you shortly.")) {
+      if (
+        (data.text || "")
+          .toLowerCase()
+          .includes(
+            "Thank you for your interest, we will be in contact with you shortly."
+          )
+      ) {
         setChatClosed(true);
       }
     } catch (error) {
       const errorResponse = {
         id: Date.now() + 2,
         text: "⚠️ Error connecting to AI assistant.",
-        isBot: true
+        isBot: true,
       };
-      setMessages(prev => [...prev, errorResponse]);
+      setMessages((prev) => [...prev, errorResponse]);
     }
   };
 
@@ -70,7 +94,10 @@ const Contact = () => {
       <header className="border-b border-border/50 bg-background/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-6xl mx-auto px-8 py-4">
           <div className="flex items-center justify-between">
-            <Link to="/" className="text-xl font-semibold text-foreground hover:text-primary transition-colors">
+            <Link
+              to="/"
+              className="text-xl font-semibold text-foreground hover:text-primary transition-colors"
+            >
               Noctana Labs
             </Link>
             <Link to="/">
@@ -94,24 +121,33 @@ const Contact = () => {
             >
               <div className="flex items-center gap-3 mb-6">
                 <MessageCircle className="w-6 h-6 text-primary" />
-                <h2 className="text-2xl font-semibold text-foreground">Chat with AI</h2>
+                <h2 className="text-2xl font-semibold text-foreground">
+                  Chat with AI
+                </h2>
               </div>
 
               {/* Chat Messages */}
-              <div className="h-96 bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-sm border border-border/30 rounded-2xl p-6 overflow-y-auto space-y-4">
+              <div
+                ref={chatContainerRef}
+                className="h-96 bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-sm border border-border/30 rounded-2xl p-6 overflow-y-auto space-y-4"
+              >
                 {messages.map((message) => (
                   <motion.div
                     key={message.id}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3 }}
-                    className={`flex ${message.isBot ? 'justify-start' : 'justify-end'}`}
+                    className={`flex ${
+                      message.isBot ? "justify-start" : "justify-end"
+                    }`}
                   >
-                    <div className={`max-w-xs lg:max-w-md px-4 py-3 rounded-2xl ${
-                      message.isBot 
-                        ? 'bg-primary/10 text-foreground border border-primary/20' 
-                        : 'bg-primary text-primary-foreground'
-                    }`}>
+                    <div
+                      className={`max-w-xs lg:max-w-md px-4 py-3 rounded-2xl ${
+                        message.isBot
+                          ? "bg-primary/10 text-foreground border border-primary/20"
+                          : "bg-primary text-primary-foreground"
+                      }`}
+                    >
                       <p className="text-sm">{message.text}</p>
                     </div>
                   </motion.div>
@@ -124,11 +160,11 @@ const Contact = () => {
                   value={inputMessage}
                   onChange={(e) => setInputMessage(e.target.value)}
                   placeholder="Type your message..."
-                  onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                  onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
                   className="flex-1"
                   disabled={chatClosed}
                 />
-                <Button 
+                <Button
                   onClick={handleSendMessage}
                   size="icon"
                   className="transition-all duration-200"
@@ -158,28 +194,35 @@ const Contact = () => {
                 Get in Touch
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Ready to transform your business with AI? Start a conversation with our intelligent assistant above or reach out to our team directly.
+                Ready to transform your business with AI? Start a conversation
+                with our intelligent assistant above or reach out to our team
+                directly.
               </p>
             </div>
 
             {/* Contact Methods */}
             <div className="grid md:grid-cols-2 gap-6">
               <div className="p-6 rounded-2xl bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-sm border border-border/30">
-                <h3 className="text-xl font-semibold text-foreground mb-4">Contact Information</h3>
+                <h3 className="text-xl font-semibold text-foreground mb-4">
+                  Contact Information
+                </h3>
                 <div className="space-y-3 text-muted-foreground">
-                  <p>📧 hello@noctanalabs.com</p>
-                  <p>📞 +1 (555) 123-4567</p>
-                  <p>🏢 San Francisco, CA</p>
+                  <p>📧 contact@noctanalabs.com</p>
+                  <p>📞 +65 ---- ----</p>
+                  <p>🏢 Singapore</p>
                 </div>
               </div>
 
               <div className="p-6 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20">
                 <div className="flex items-center gap-3 mb-3">
                   <Bot className="w-6 h-6 text-primary" />
-                  <h3 className="text-xl font-semibold text-foreground">AI Assistant</h3>
+                  <h3 className="text-xl font-semibold text-foreground">
+                    AI Assistant
+                  </h3>
                 </div>
                 <p className="text-muted-foreground">
-                  Get instant answers to your questions using our AI chat feature above.
+                  Get instant answers to your questions using our AI chat
+                  feature above.
                 </p>
               </div>
             </div>
