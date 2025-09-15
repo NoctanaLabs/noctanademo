@@ -1,195 +1,77 @@
-import { motion } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Send, MessageCircle, Bot } from "lucide-react";
-import { Link } from "react-router-dom";
+import { DottedSurface } from "@/components/ui/dotted-surface";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { RotatingText } from "@/components/ui/rotating-text";
+import { cn } from '@/lib/utils';
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import AboutSection from "@/components/sections/AboutSection";
+import FeaturesSection from "@/components/sections/FeaturesSection";
+import StatisticsSection from "@/components/sections/StatisticsSection";
+import PricingSection from "@/components/sections/PricingSection";
 
-const N8N_WEBHOOK_URL =
-  "https://n8n.srv998243.hstgr.cloud/webhook/24c7b253-b28f-49d1-810b-c19d56d14030/chat";
+const Index = () => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"]
+  });
 
-// Cross-browser session ID generator
-const generateSessionId = () => {
-  if (typeof crypto !== "undefined" && crypto.randomUUID) {
-    return crypto.randomUUID();
-  } else {
-    return (
-      Math.random().toString(36).substring(2, 10) +
-      Math.random().toString(36).substring(2, 10) +
-      Date.now().toString(36)
-    );
-  }
-};
-
-const Contact = () => {
-  const [messages, setMessages] = useState([
-    {
-      id: 1,
-      text: "Hello! I am Noct AI assistant. How may I assist you today?",
-      isBot: true,
-    },
-  ]);
-
-  const [inputMessage, setInputMessage] = useState("");
-  const [chatClosed, setChatClosed] = useState(false);
-
-  const chatContainerRef = useRef(null);
-  const sessionId = useRef(generateSessionId());
-
-  // Scroll page to top on component mount
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
-
-  // Scroll chat container to bottom only on new messages, skip initial mount
-  const initialMount = useRef(true);
-  useEffect(() => {
-    if (initialMount.current) {
-      initialMount.current = false;
-      return; // skip scroll on initial load
-    }
-    if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTo({
-        top: chatContainerRef.current.scrollHeight,
-        behavior: "smooth",
-      });
-    }
-  }, [messages]);
-
-  const handleSendMessage = async () => {
-    if (chatClosed || !inputMessage.trim()) return; // Prevent sending if chat is closed
-
-    const userMessage = { id: Date.now(), text: inputMessage, isBot: false };
-    setMessages((prev) => [...prev, userMessage]);
-    setInputMessage("");
-
-    const typingId = Date.now() + 0.1;
-    setMessages((prev) => [...prev, { id: typingId, text: "Typing...", isBot: true }]);
-
-    try {
-      const res = await fetch(N8N_WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          chatInput: inputMessage,
-          sessionId: sessionId.current,
-        }),
-      });
-
-      let data;
-      try {
-        data = await res.json();
-      } catch {
-        data = { text: await res.text() };
-      }
-
-      // Remove typing indicator
-      setMessages((prev) => prev.filter((m) => m.id !== typingId));
-
-      const botResponse = {
-        id: Date.now() + 1,
-        text: data.text || "No response from assistant.",
-        isBot: true,
-      };
-      setMessages((prev) => [...prev, botResponse]);
-
-      // Close chat if trigger message appears
-      if ((data.text || "").toLowerCase().includes("thank you for your interest, we will be in contact with you shortly.")) {
-        setChatClosed(true);
-      }
-    } catch (error) {
-      setMessages((prev) => prev.filter((m) => m.id !== typingId));
-
-      const errorResponse = {
-        id: Date.now() + 2,
-        text: "⚠️ Error connecting to AI assistant.",
-        isBot: true,
-      };
-      setMessages((prev) => [...prev, errorResponse]);
-    }
-  };
+  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.5]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
+  const textOpacity = useTransform(scrollYProgress, [0.3, 0.8], [1, 0]);
 
   return (
-    <div className="min-h-screen bg-background">
-      <header className="border-b border-border/50 bg-background/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-8 py-4 flex items-center justify-between">
-          <Link to="/" className="text-xl font-semibold text-foreground hover:text-primary transition-colors">
-            Noctana Labs
-          </Link>
-          <Link to="/">
-            <Button variant="outline" size="sm">Back to Home</Button>
-          </Link>
-        </div>
-      </header>
-
-      <div className="max-w-6xl mx-auto px-8 py-24 space-y-16">
-        {/* Chat Interface */}
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="space-y-6">
-          <div className="flex items-center gap-3 mb-6">
-            <MessageCircle className="w-6 h-6 text-primary" />
-            <h2 className="text-2xl font-semibold text-foreground">Chat with AI</h2>
-          </div>
-
-          <div ref={chatContainerRef} className="h-96 bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-sm border border-border/30 rounded-2xl p-6 overflow-y-auto space-y-4">
-            {messages.map((message) => (
-              <motion.div key={message.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} className={`flex ${message.isBot ? "justify-start" : "justify-end"}`}>
-                <div className={`max-w-xs lg:max-w-md px-4 py-3 rounded-2xl ${message.isBot ? "bg-primary/10 text-foreground border border-primary/20" : "bg-primary text-primary-foreground"}`}>
-                  <p className="text-sm">{message.text}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {chatClosed && (
-            <div className="text-center text-sm text-muted-foreground mt-2">
-              Conversation has ended.
-            </div>
-          )}
-
-          <div className="flex gap-3">
-            <Input
-              value={inputMessage}
-              onChange={(e) => setInputMessage(e.target.value)}
-              placeholder={chatClosed ? "Chat has ended." : "Type your message..."}
-              onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
-              className="flex-1"
-              disabled={chatClosed}
-            />
-            <Button onClick={handleSendMessage} size="icon" disabled={chatClosed}>
-              <Send className="w-4 h-4" />
-            </Button>
+    <div className="relative bg-background">
+      {/* Hero Section with Fade Animation */}
+      <div ref={ref} className="relative h-screen overflow-hidden">
+        <motion.div 
+          style={{ opacity, scale }}
+          className="fixed top-0 left-0 w-full h-screen z-10"
+        >
+          {/* Animated Dotted Surface Background */}
+          <DottedSurface />
+          
+          {/* Theme Toggle Button */}
+          
+          {/* Main Content */}
+          <div className="relative z-10 flex h-screen items-center justify-center">
+            <motion.div 
+              style={{ opacity: textOpacity }}
+              className="text-center space-y-4 -mt-[70px] sm:-mt-[90px] md:-mt-[110px] lg:-mt-[130px] px-[40px]"
+            >
+              {/* Elegant glow effect */}
+              <div aria-hidden="true" className={cn('pointer-events-none absolute -top-10 left-1/2 size-full -translate-x-1/2 rounded-full', 'bg-gradient-glow', 'blur-[30px]')} />
+              
+              {/* Hero Content */}
+              <div className="relative">
+                <h1 className="font-mono text-5xl sm:text-5x2 md:text-7xl lg:text-8xl font-semibold tracking-tight text-foreground mb-6 mx-0 my-0 px-0 py-[14px] whitespace-nowrap">Noctana Labs</h1>
+                <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-2xl leading-relaxed px-0 -mt-[30px] py-0 mx-0 whitespace-nowrap">
+                  AI that works while you{" "}
+                  <RotatingText words={["Sleep", "Build", "Innovate", "Lead", "Revolutionise", "Dream", "Achieve", "Develop"]} className="text-lg sm:text-xl md:text-2xl text-primary font-medium" />
+                  .
+                </p>
+              </div>
+            </motion.div>
           </div>
         </motion.div>
+      </div>
 
-        {/* Contact Information */}
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="space-y-8">
-          <div className="space-y-6">
-            <h1 className="text-4xl lg:text-5xl font-semibold tracking-tight text-foreground">Get in Touch</h1>
-            <p className="text-lg text-muted-foreground leading-relaxed">Ready to transform your business with AI? Start a conversation with our intelligent assistant above or reach out to our team directly.</p>
-          </div>
+      {/* Content Sections */}
+      <div className="relative z-20">
+        {/* About Section */}
+        <AboutSection />
 
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-sm border border-border/30">
-              <h3 className="text-xl font-semibold text-foreground mb-4">Contact Information</h3>
-              <div className="space-y-3 text-muted-foreground">
-                <p>📧 contact@noctanalabs.com</p>
-                <p>📞 +65 ---- ----</p>
-                <p>🏢 Singapore</p>
-              </div>
-            </div>
+        {/* Features Section */}
+        <FeaturesSection />
 
-            <div className="p-6 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20">
-              <div className="flex items-center gap-3 mb-3">
-                <Bot className="w-6 h-6 text-primary" />
-                <h3 className="text-xl font-semibold text-foreground">AI Assistant</h3>
-              </div>
-              <p className="text-muted-foreground">Get instant answers to your questions using our AI chat feature above.</p>
-            </div>
-          </div>
-        </motion.div>
+        {/* Statistics Section */}
+        <StatisticsSection />
+
+        {/* Pricing Section */}
+        <PricingSection />
       </div>
     </div>
   );
 };
 
-export default Contact;
+export default Index;
