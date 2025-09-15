@@ -127,3 +127,19 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+@layer components {
+  /* Button pulse animation for attention */
+  @keyframes attention-pulse {
+    0%, 70%, 100% {
+      transform: scale(1);
+    }
+    15% {
+      transform: scale(1.05);
+    }
+  }
+
+  .button-pulse {
+    animation: attention-pulse 3s ease-in-out infinite;
+  }
+}
