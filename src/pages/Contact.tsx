@@ -7,20 +7,18 @@ import { createChat } from '@n8n/chat';
 import '@n8n/chat/dist/style.css';
 
 const Contact = () => {
-  // Use useEffect to initialize the n8n chat widget after the component has mounted
   useEffect(() => {
-    // Scroll to the top when the component mounts
     window.scrollTo(0, 0);
 
-    // Initialize the n8n chat widget
-    // The target is the ID of the div where the chat should be embedded.
     createChat({
-      webhookUrl: 'https://n8n.srv998243.hstgr.cloud/webhook/24c7b253-b28f-49d1-810b-c19d56d14030/chat',
-      target: '#n8n-chat-container',
-      mode: 'fullscreen' // Use 'fullscreen' mode to fill the container div
+      webhookUrl: 'YOUR_PRODUCTION_WEBHOOK_URL',
+      // Change the mode from 'popup' to 'inline'
+      mode: 'inline',
+      // Specify the container element where the chat will be rendered
+      target: '#n8n-chat-container'
     });
 
-  }, []); // The empty dependency array ensures this runs only once
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
@@ -42,7 +40,7 @@ const Contact = () => {
 
       <div className="max-w-6xl mx-auto px-8 py-24">
         <div className="space-y-16">
-          {/* Chat Interface - n8n Bot */}
+          {/* Chat Interface */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -55,7 +53,6 @@ const Contact = () => {
             </div>
 
             {/* Container for the n8n Chat Widget */}
-            {/* The ID #n8n-chat-container must match the 'target' in createChat */}
             <div id="n8n-chat-container" className="h-96"></div>
           </motion.div>
 
