@@ -104,9 +104,11 @@ const PricingSection = () => {
                 </motion.div>
               )}
               
-              <Card className={`h-96 transition-all duration-300 bg-card/50 backdrop-blur-sm border-border/30 hover:border-primary/40 hover:shadow-glow group-hover:bg-card/70 ${
-                plan.popular ? 'border-primary/40 shadow-glow bg-card/60 scale-105' : ''
-              }`}>
+              <Card className={`h-96 transition-all duration-300 bg-card/50 backdrop-blur-sm relative ${
+                plan.popular 
+                  ? 'border-primary/60 shadow-[0_0_30px_hsl(var(--primary)/0.4),0_0_60px_hsl(var(--primary)/0.2)] bg-card/60 scale-105 before:absolute before:inset-0 before:rounded-lg before:p-[2px] before:bg-gradient-to-r before:from-primary/80 before:via-primary/50 before:to-primary/80 before:-z-10' 
+                  : 'border-border/40 hover:border-primary/30 hover:shadow-[0_0_20px_hsl(var(--primary)/0.2)] before:absolute before:inset-0 before:rounded-lg before:p-[1px] before:bg-gradient-to-r before:from-border/50 before:via-border/30 before:to-border/50 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300 before:-z-10'
+              } group-hover:bg-card/70`}>
                 <CardHeader className="text-center pb-6 pt-8">
                   <CardTitle className="text-2xl font-bold tracking-tight mb-4 text-foreground">
                     {plan.name}
