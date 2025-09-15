@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Send, MessageCircle, Bot } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const N8N_WEBHOOK_URL = "https://your-n8n-instance.com/webhook/chat"; // replace with your webhook
+const N8N_WEBHOOK_URL = "https://n8n.srv998243.hstgr.cloud/webhook/24c7b253-b28f-49d1-810b-c19d56d14030/chat"; // replace with your webhook
 
 const Contact = () => {
   const [messages, setMessages] = useState([
