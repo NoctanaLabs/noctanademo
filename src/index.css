@@ -127,19 +127,3 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
-
-@layer components {
-  /* Button breathing animation for attention */
-  @keyframes breathing {
-    0%, 100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.02);
-    }
-  }
-
-  .button-pulse {
-    animation: breathing 4s ease-in-out infinite;
-  }
-}
