@@ -140,6 +140,6 @@ All colors MUST be HSL.
   }
 
   .button-pulse {
-    animation: attention-pulse 3s ease-in-out infinite;
+    animation: attention-pulse 15s ease-in-out infinite;
   }
 }
