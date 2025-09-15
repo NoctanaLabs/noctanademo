@@ -5,11 +5,11 @@ import { Input } from "@/components/ui/input";
 import { Send, MessageCircle, Bot } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const N8N_WEBHOOK_URL = "https://n8n.srv998243.hstgr.cloud/webhook/24c7b253-b28f-49d1-810b-c19d56d14030/chat"; // replace with your webhook
+const N8N_WEBHOOK_URL = "https://n8n.srv998243.hstgr.cloud/webhook/24c7b253-b28f-49d1-810b-c19d56d14030/chat";
 
 const Contact = () => {
   const [messages, setMessages] = useState([
-    { id: 1, text: "Hello! I'm your AI assistant. How can I help you today?", isBot: true }
+    { id: 1, text: "Hello! I am Noct AI assistant. How may I assist you today?", isBot: true }
   ]);
   const [inputMessage, setInputMessage] = useState("");
   const [chatClosed, setChatClosed] = useState(false);
@@ -51,7 +51,7 @@ const Contact = () => {
       setMessages(prev => [...prev, botResponse]);
 
       // Close chat if trigger message appears
-      if ((data.text || "").toLowerCase().includes("thank you for your interest")) {
+      if ((data.text || "").toLowerCase().includes("Thank you for your interest, we will be in contact with you shortly.")) {
         setChatClosed(true);
       }
     } catch (error) {
@@ -141,7 +141,7 @@ const Contact = () => {
           ) : (
             <div className="p-6 text-center border rounded-2xl bg-muted">
               <p className="text-lg text-muted-foreground">
-                Conversation ended. Thank you!
+                Conversation has ended.
               </p>
             </div>
           )}
