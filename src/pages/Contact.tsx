@@ -33,20 +33,23 @@ const Contact = () => {
   const [inputMessage, setInputMessage] = useState("");
   const [chatClosed, setChatClosed] = useState(false);
 
-  const chatContainerRef = useRef(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
   const sessionId = useRef(generateSessionId());
 
-  // Scroll page to top on component mount
+  // Scroll page to top on mount after layout settles
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    const timeout = setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 50);
+    return () => clearTimeout(timeout);
   }, []);
 
-  // Scroll chat container to bottom only on new messages, skip initial mount
+  // Scroll chat container to bottom only on new messages
   const initialMount = useRef(true);
   useEffect(() => {
     if (initialMount.current) {
       initialMount.current = false;
-      return; // skip scroll on initial load
+      return; // skip chat scroll on initial load
     }
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTo({
@@ -57,7 +60,7 @@ const Contact = () => {
   }, [messages]);
 
   const handleSendMessage = async () => {
-    if (chatClosed || !inputMessage.trim()) return; // Prevent sending if chat is closed
+    if (chatClosed || !inputMessage.trim()) return;
 
     const userMessage = { id: Date.now(), text: inputMessage, isBot: false };
     setMessages((prev) => [...prev, userMessage]);
