@@ -64,7 +64,10 @@ const Contact = () => {
       const res = await fetch(N8N_WEBHOOK_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: inputMessage, sessionId: sessionId.current }),
+        body: JSON.stringify({
+          chatInput: inputMessage, // <-- changed field name
+          sessionId: sessionId.current
+        }),
       });
 
       let data;
