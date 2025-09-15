@@ -1,61 +1,26 @@
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Send, MessageCircle, Bot } from "lucide-react";
 import { Link } from "react-router-dom";
+import { createChat } from '@n8n/chat';
+import '@n8n/chat/dist/style.css';
 
 const Contact = () => {
-  const [messages, setMessages] = useState([
-    { id: 1, text: "Hello! I'm your AI assistant. How can I help you today?", isBot: true }
-  ]);
-  const [inputMessage, setInputMessage] = useState("");
-
+  // Use useEffect to initialize the n8n chat widget after the component has mounted
   useEffect(() => {
-    // Scroll to top when component mounts
+    // Scroll to the top when the component mounts
     window.scrollTo(0, 0);
 
-    // Dynamically inject n8n chat CSS
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = "https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css";
-    document.head.appendChild(link);
+    // Initialize the n8n chat widget
+    // The target is the ID of the div where the chat should be embedded.
+    createChat({
+      webhookUrl: 'https://n8n.srv998243.hstgr.cloud/webhook/24c7b253-b28f-49d1-810b-c19d56d14030/chat',
+      target: '#n8n-chat-container',
+      mode: 'fullscreen' // Use 'fullscreen' mode to fill the container div
+    });
 
-    // Dynamically import and create n8n chat
-    import("https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js")
-      .then((module) => {
-        module.createChat({
-          webhookUrl: "YOUR_PRODUCTION_WEBHOOK_URL",
-          // Optional: container selector if you want to mount it in a specific div
-          container: "#n8n-chat-container"
-        });
-      })
-      .catch((err) => console.error("Failed to load n8n chat:", err));
-
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
-
-  const handleSendMessage = () => {
-    if (!inputMessage.trim()) return;
-    
-    const newMessage = { id: Date.now(), text: inputMessage, isBot: false };
-    setMessages(prev => [...prev, newMessage]);
-    
-    // Simulate AI response
-    setTimeout(() => {
-      const botResponse = { 
-        id: Date.now() + 1, 
-        text: "Thanks for your message! Our team will get back to you soon. Is there anything specific you'd like to know about our AI solutions?", 
-        isBot: true 
-      };
-      setMessages(prev => [...prev, botResponse]);
-    }, 1000);
-    
-    setInputMessage("");
-  };
+  }, []); // The empty dependency array ensures this runs only once
 
   return (
     <div className="min-h-screen bg-background">
@@ -77,7 +42,7 @@ const Contact = () => {
 
       <div className="max-w-6xl mx-auto px-8 py-24">
         <div className="space-y-16">
-          {/* Chat Interface */}
+          {/* Chat Interface - n8n Bot */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -89,47 +54,9 @@ const Contact = () => {
               <h2 className="text-2xl font-semibold text-foreground">Chat with AI</h2>
             </div>
 
-            {/* n8n Chat container */}
-            <div id="n8n-chat-container" className="h-96" />
-
-            {/* Legacy Chat Messages */}
-            <div className="h-96 bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-sm border border-border/30 rounded-2xl p-6 overflow-y-auto space-y-4">
-              {messages.map((message) => (
-                <motion.div
-                  key={message.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className={`flex ${message.isBot ? 'justify-start' : 'justify-end'}`}
-                >
-                  <div className={`max-w-xs lg:max-w-md px-4 py-3 rounded-2xl ${
-                    message.isBot 
-                      ? 'bg-primary/10 text-foreground border border-primary/20' 
-                      : 'bg-primary text-primary-foreground'
-                  }`}>
-                    <p className="text-sm">{message.text}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Chat Input */}
-            <div className="flex gap-3">
-              <Input
-                value={inputMessage}
-                onChange={(e) => setInputMessage(e.target.value)}
-                placeholder="Type your message..."
-                onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                className="flex-1"
-              />
-              <Button 
-                onClick={handleSendMessage}
-                size="icon"
-                className="transition-all duration-200"
-              >
-                <Send className="w-4 h-4" />
-              </Button>
-            </div>
+            {/* Container for the n8n Chat Widget */}
+            {/* The ID #n8n-chat-container must match the 'target' in createChat */}
+            <div id="n8n-chat-container" className="h-96"></div>
           </motion.div>
 
           {/* Contact Information */}
