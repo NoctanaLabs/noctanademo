@@ -157,7 +157,7 @@ const Contact = () => {
             <h2 className="text-2xl font-semibold text-foreground">Chat with AI</h2>
           </div>
 
-          <div ref={chatContainerRef} className="h-96 bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-sm border border-border/30 rounded-2xl p-6 overflow-y-auto space-y-4">
+          <div ref={chatContainerRef} className="h-96 bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-sm border-2 border-primary/50 shadow-elegant rounded-2xl p-6 overflow-y-auto space-y-4 hover:border-primary/70 transition-all duration-300">
             {messages.map((message) => (
               <motion.div key={message.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }} className={`flex ${message.isBot ? "justify-start" : "justify-end"}`}>
                 <div className={`max-w-xs lg:max-w-md px-4 py-3 rounded-2xl ${message.isBot ? "bg-primary/10 text-foreground border border-primary/20" : "bg-primary text-primary-foreground"}`}>
