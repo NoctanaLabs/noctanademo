@@ -107,7 +107,7 @@ const AboutSection = () => {
               transition={{ duration: 0.15 }}
             >
               <Link to="/contact">
-                <Button size="lg" className="px-8 py-6 text-lg transition-all duration-200">
+                <Button size="lg" className="px-10 py-8 text-xl transition-all duration-200">
                   Talk to our AI
                 </Button>
               </Link>
