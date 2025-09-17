@@ -179,7 +179,7 @@ const Contact = () => {
               onChange={(e) => setInputMessage(e.target.value)}
               placeholder={chatClosed ? "Chat has ended." : "Type your message..."}
               onKeyPress={(e) => e.key === "Enter" && handleSendMessage()}
-              className="flex-1"
+              className="flex-1 border-2 border-primary/50 focus:border-primary shadow-button hover:border-primary/70 transition-all duration-300"
               disabled={chatClosed}
             />
             <Button onClick={handleSendMessage} size="icon" disabled={chatClosed}>
