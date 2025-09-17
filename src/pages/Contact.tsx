@@ -39,7 +39,7 @@ const Contact = () => {
   const [messages, setMessages] = useState([
     {
       id: 1,
-      text: "Hello! I am Noct AI assistant. Let me know what project you are interested in for a booking, or ask me a question about our services. How may I assist you today?",
+      text: "Hello! I’m Noct, your AI assistant. Please share the project you’d like to book or any questions about our services, and I’ll be glad to help.",
       isBot: true,
     },
   ]);
