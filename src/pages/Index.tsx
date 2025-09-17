@@ -1,9 +1,11 @@
 import { DottedSurface } from "@/components/ui/dotted-surface";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { RotatingText } from "@/components/ui/rotating-text";
+import { Button } from "@/components/ui/button";
 import { cn } from '@/lib/utils';
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
+import { ChevronUp } from "lucide-react";
 import AboutSection from "@/components/sections/AboutSection";
 import FeaturesSection from "@/components/sections/FeaturesSection";
 import StatisticsSection from "@/components/sections/StatisticsSection";
@@ -11,6 +13,9 @@ import PricingSection from "@/components/sections/PricingSection";
 
 const Index = () => {
   const ref = useRef(null);
+  const aboutSectionRef = useRef(null);
+  const [showBackToTop, setShowBackToTop] = useState(false);
+  
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"]
@@ -19,6 +24,23 @@ const Index = () => {
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0.5]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
   const textOpacity = useTransform(scrollYProgress, [0.3, 0.8], [1, 0]);
+
+  // Show back to top button after scrolling past About section
+  useEffect(() => {
+    const handleScroll = () => {
+      if (aboutSectionRef.current) {
+        const aboutSectionBottom = aboutSectionRef.current.offsetTop + aboutSectionRef.current.offsetHeight;
+        setShowBackToTop(window.scrollY > aboutSectionBottom);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <div className="relative bg-background">
@@ -59,7 +81,9 @@ const Index = () => {
       {/* Content Sections */}
       <div className="relative z-20">
         {/* About Section */}
-        <AboutSection />
+        <div ref={aboutSectionRef}>
+          <AboutSection />
+        </div>
 
         {/* Features Section */}
         <FeaturesSection />
@@ -70,6 +94,25 @@ const Index = () => {
         {/* Pricing Section */}
         <PricingSection />
       </div>
+
+      {/* Back to Top Button */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ 
+          opacity: showBackToTop ? 1 : 0, 
+          scale: showBackToTop ? 1 : 0 
+        }}
+        transition={{ duration: 0.3 }}
+        className="fixed bottom-8 right-8 z-50"
+      >
+        <Button
+          onClick={scrollToTop}
+          size="icon"
+          className="shadow-elegant hover:shadow-button-hover"
+        >
+          <ChevronUp className="w-5 h-5" />
+        </Button>
+      </motion.div>
     </div>
   );
 };
