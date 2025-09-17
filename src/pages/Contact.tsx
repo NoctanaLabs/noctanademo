@@ -39,7 +39,10 @@ const Contact = () => {
   const [messages, setMessages] = useState([
     {
       id: 1,
-      text: "Hello! I am Noct AI assistant. How may I assist you today?",
+      text: "Hello! I am Noct AI assistant. Let me know what project you are interested in for a booking or ask me a question about our services. How may I assist you today?",
+      isBot: true,
+      id: 2,
+      text: "How may I assist you today?",
       isBot: true,
     },
   ]);
@@ -154,7 +157,7 @@ const Contact = () => {
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="space-y-6">
           <div className="flex items-center gap-3 mb-6">
             <MessageCircle className="w-6 h-6 text-primary" />
-            <h2 className="text-2xl font-semibold text-foreground">Chat with AI</h2>
+            <h2 className="text-2xl font-semibold text-foreground">Chat with AI to work with us!</h2>
           </div>
 
           <div ref={chatContainerRef} className="h-96 bg-gradient-to-br from-background/80 to-background/40 backdrop-blur-sm border-2 border-primary/50 shadow-elegant rounded-2xl p-6 overflow-y-auto space-y-4 hover:border-primary/70 transition-all duration-300">
@@ -210,7 +213,7 @@ const Contact = () => {
                 <Bot className="w-6 h-6 text-primary" />
                 <h3 className="text-xl font-semibold text-foreground">AI Assistant</h3>
               </div>
-              <p className="text-muted-foreground">Get instant answers to your questions using our AI chat feature above.</p>
+              <p className="text-muted-foreground">Book a consultation with us or get instant answers to your questions regarding the use of AI in the chat feature above.</p>
             </div>
           </div>
         </motion.div>
