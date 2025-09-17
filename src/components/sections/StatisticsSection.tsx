@@ -3,9 +3,9 @@ import { useRef, useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const statistics = [
-  { value: 32, suffix: "%", label: "average cost savings per client in the first year" },
-  { value: 10000, suffix: "+", label: "hours of manual work automated in 2024" },
-  { value: 85, suffix: "%", label: "faster decision-making for operations teams" }
+  { value: 50, suffix: "%+", label: "expected reduction in repetitive tasks for early clients" },
+  { value: 100, suffix: "+", label: "hours already saved through initial automation projects" },
+  { value: 3, suffix: "x", label: "faster response time compared to manual processes" }
 ];
 
 const caseStudies = [
