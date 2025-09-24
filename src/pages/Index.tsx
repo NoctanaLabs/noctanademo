@@ -14,7 +14,9 @@ import PricingSection from "@/components/sections/PricingSection";
 const Index = () => {
   const ref = useRef(null);
   const aboutSectionRef = useRef(null);
+  const footerRef = useRef(null);
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [buttonPosition, setButtonPosition] = useState({ bottom: 32, right: 32 });
   
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -25,12 +27,32 @@ const Index = () => {
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
   const textOpacity = useTransform(scrollYProgress, [0.3, 0.8], [1, 0]);
 
-  // Show back to top button after scrolling past About section
+  // Show back to top button after scrolling past About section and position it above footer
   useEffect(() => {
     const handleScroll = () => {
       if (aboutSectionRef.current) {
         const aboutSectionBottom = aboutSectionRef.current.offsetTop + aboutSectionRef.current.offsetHeight;
-        setShowBackToTop(window.scrollY > aboutSectionBottom);
+        const shouldShow = window.scrollY > aboutSectionBottom;
+        setShowBackToTop(shouldShow);
+
+        if (shouldShow && footerRef.current) {
+          const footerTop = footerRef.current.offsetTop;
+          const scrollY = window.scrollY;
+          const windowHeight = window.innerHeight;
+          const buttonHeight = 48; // Button height + margin
+          
+          // Calculate if button would overlap with footer
+          const footerDistanceFromBottom = footerTop - (scrollY + windowHeight);
+          
+          if (footerDistanceFromBottom < buttonHeight) {
+            // Position button above footer
+            const newBottom = Math.max(32, windowHeight - footerTop + scrollY + 16);
+            setButtonPosition({ bottom: newBottom, right: 32 });
+          } else {
+            // Reset to fixed position
+            setButtonPosition({ bottom: 32, right: 32 });
+          }
+        }
       }
     };
 
@@ -103,7 +125,11 @@ const Index = () => {
           scale: showBackToTop ? 1 : 0 
         }}
         transition={{ duration: 0.3 }}
-        className="fixed bottom-8 right-8 z-50"
+        className="fixed z-50"
+        style={{ 
+          bottom: `${buttonPosition.bottom}px`, 
+          right: `${buttonPosition.right}px` 
+        }}
       >
         <Button
           onClick={scrollToTop}
@@ -113,6 +139,9 @@ const Index = () => {
           <ChevronUp className="w-5 h-5" />
         </Button>
       </motion.div>
+
+      {/* Footer Reference */}
+      <div ref={footerRef} />
     </div>
   );
 };
